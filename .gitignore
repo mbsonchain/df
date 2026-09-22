@@ -1,8 +1,12 @@
 .env
 .env.*
 !.env.example
-.vercel/
 node_modules/
 dist/
+.react-router/
+.shopify/
+.vercel/
 .DS_Store
 backups/
+
+*.tsbuildinfo
