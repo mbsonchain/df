@@ -3,7 +3,7 @@ import {Links, Meta, Outlet, Scripts, ScrollRestoration} from 'react-router';
 import {Shell} from '~/components/Shell';
 import skeletonStyles from '~/styles/skeleton.css?url';
 
-export function links() {return [{rel: 'stylesheet', href: skeletonStyles}];}
+export function links() {return [{rel: 'stylesheet', href: 'https://use.typekit.net/sji2png.css'}, {rel: 'stylesheet', href: skeletonStyles}];}
 
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
