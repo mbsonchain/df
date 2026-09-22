@@ -1,5 +1,9 @@
 import {useNonce} from '@shopify/hydrogen';
 import {Links, Meta, Outlet, Scripts, ScrollRestoration} from 'react-router';
+import {Shell} from '~/components/Shell';
+import skeletonStyles from '~/styles/skeleton.css?url';
+
+export function links() {return [{rel: 'stylesheet', href: skeletonStyles}];}
 
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
@@ -22,7 +26,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return <Shell><Outlet /></Shell>;
 }
 
 export function ErrorBoundary() {
