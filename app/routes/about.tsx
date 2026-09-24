@@ -1,0 +1,2 @@
+export function meta() {return [{title: 'About — Desert Formal'}];}
+export default function About() {return <article className="about-page"><p className="eyebrow">A little context</p><h1>Desert<br/><em>Formal.</em></h1><div className="about-copy"><p>A place for clothing, objects, and the things happening around them.</p><p>The website is an ongoing journal. The gallery is a collection to explore.</p><hr/><p className="sample-note">This is a placeholder for your About text. The final story, images, and contact details will go here.</p></div></article>;}
