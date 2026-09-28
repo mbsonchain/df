@@ -2,6 +2,7 @@
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/hydrogen/oxygen';
 import {createHydrogenRouterContext} from '~/lib/context';
+import {launchResponse} from '~/lib/launch';
 
 /**
  * Export a fetch handler in module format.
@@ -13,6 +14,9 @@ export default {
     executionContext: ExecutionContext,
   ): Promise<Response> {
     try {
+      const lockedResponse = launchResponse(request);
+      if (lockedResponse) return lockedResponse;
+
       const hydrogenContext = await createHydrogenRouterContext(
         request,
         env,

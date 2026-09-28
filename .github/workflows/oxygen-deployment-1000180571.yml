@@ -35,7 +35,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check types and launch lock
+        run: npm run typecheck && node scripts/check-launch.mjs
+
       - name: Build and Publish to Oxygen
         run: npx shopify hydrogen deploy
         env:
+          VITE_FORMAL_PREVIEW: ${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
           SHOPIFY_HYDROGEN_DEPLOYMENT_TOKEN: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000180571 }}
+
+      - name: Save deployment link
+        run: node scripts/deployment-link.mjs
