@@ -77,6 +77,6 @@ export function Shell({children}: {children:React.ReactNode}) {
       {section ? <nav className="nav-right" aria-label={`More ${section} views`}>{[1,2].map(index => <Link key={keys[index]} className="view-link" to={`/${section}?view=${keys[index]}`} aria-current={activeView === index ? 'page' : undefined}>{labels[index]}</Link>)}</nav> : <nav className="nav-right" aria-label="Network and cart"><NavLink to="/network">network</NavLink><NavLink to="/cart">cart</NavLink></nav>}
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock/>{!home && <nav aria-label="Return navigation"><Link to="/">home</Link><Link to={destination}>{network ? 'gallery' : 'network'} ↗</Link></nav>}</footer>
+    <footer className="site-footer"><LocalClock/>{!home && <nav aria-label="Return navigation"><Link to="/">home</Link></nav>}</footer>
   </div>;
 }
