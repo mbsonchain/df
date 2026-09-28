@@ -1,2 +1,13 @@
-export function meta(){return [{title:'About — Formal'}];}
-export default function About(){return <article className="about-page"><p className="micro">About / Formal</p><h1>Clothes. Objects.<br/>An ongoing conversation.</h1><div className="about-columns"><p>Formal brings together the things we make and the things happening around them.</p><div><p>The gallery is a collection of clothing and objects. The network is a living journal of projects, places, and people.</p><p>Island Formal.<br/>Desert Formal.<br/>Spazio Libero.</p><p className="content-note">A first draft. Your own words will take their place here.</p></div></div></article>;}
+import {aboutSections} from '~/content/about';
+
+export function meta() {return [{title: 'About — Formal'}];}
+
+export default function About() {
+  return <article className="about-page">
+    <h1 className="sr-only">About</h1>
+    {aboutSections.map((section, index) => <section className="about-section" key={section.title} aria-labelledby={`about-heading-${index}`}>
+      <h2 id={`about-heading-${index}`}>{section.title}</h2>
+      <p>{section.body}</p>
+    </section>)}
+  </article>;
+}
