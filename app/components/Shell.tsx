@@ -67,7 +67,7 @@ export function Shell({children}: {children:React.ReactNode}) {
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     <a href="#main" className="skip-link">Skip to content</a>
     <WorldClocks />
-    <header className="site-header">
+    <header className={`site-header ${home || section ? 'compact-header' : ''}`}>
       {section ? <nav className="nav-left" aria-label={`${section} views`}><Link className="section-link" to={`/${section}`}>{section}</Link><Link className="view-link" to={`/${section}?view=${keys[0]}`} aria-current={activeView === 0 ? 'page' : undefined}>{labels[0]}</Link></nav> : <nav className="nav-left" aria-label="Gallery and information"><NavLink to="/gallery">gallery</NavLink><NavLink to="/about">about</NavLink></nav>}
       <Link className="flower-switch" to={destination} aria-label={`Switch to ${network ? 'gallery' : 'network'}`}>
         <span className={`flower-weight ${gallery ? 'selected' : ''}`} aria-hidden="true"/>
