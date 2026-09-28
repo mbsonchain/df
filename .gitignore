@@ -10,3 +10,5 @@ dist/
 backups/
 
 *.tsbuildinfo
+
+h2_deploy_log.json
