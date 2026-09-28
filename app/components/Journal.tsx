@@ -18,7 +18,7 @@ export function Journal() {
     <div className="journal-atmosphere" aria-hidden="true"/>
     <aside className="artifact artifact-left" aria-label="Related project"><Link to={`/network/projects/${projects[active].slug}`}><img src={projects[active].image} alt={projects[active].title}/><span>{projects[active].title} ↗</span></Link></aside>
     <aside className="artifact artifact-right" aria-label="Related note"><span className="micro">a note from here / {current.number}</span><p>{current.note}</p><Link to={`/network/posts/${current.id}`}>read the story ↗</Link></aside>
-    <div className="journal-column"><div className="journal-intro"><p className="micro">Network / a continuing journal</p><h1>Things in<br/>the making.</h1><p>From the studio, and further afield.</p></div>
+    <div className="journal-column">
       {posts.map((post,index)=><article className="journal-entry" key={post.id} data-index={index} ref={element=>{sections.current[index]=element;}}>
         <Link className={`journal-poster poster-${index}`} to={`/network/posts/${post.id}`} aria-label={`Read ${post.title}`}>
           {index===0?<><span className="poster-number">01</span><span className="poster-words">An open<br/>invitation.</span><span className="poster-caption">a place for things to begin</span></>:index===1?<img src={identity.flower} alt="A flower study"/>:<><span className="film-frame"><span>▶</span></span><span className="poster-caption">a moment, held in motion</span></>}

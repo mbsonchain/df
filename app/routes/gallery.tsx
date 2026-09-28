@@ -31,8 +31,8 @@ export default function Gallery() {
     element.addEventListener('wheel',wheel,{passive:false});
     return ()=>element.removeEventListener('wheel',wheel);
   },[view]);
-  return <section className={`gallery-page gallery-view-${view}`} aria-label="Product gallery" onClick={event=>{if(swiped.current){swiped.current=false;return;}if(isWhitespace(event))change((view+1)%3);}}>
-    <div className="section-heading"><span>Gallery</span><span>Objects, in circulation</span><span>01—06</span></div>
+  return <section className={`gallery-page gallery-view-${view}`} aria-label="Product gallery" onClick={event=>{if(swiped.current){swiped.current=false;return;}if(view===1 && isWhitespace(event))setArrangement(value=>(value+1)%products.length);}}>
+    <div className="view-bar"><ViewControls labels={views} active={view} onChange={change}/></div>
     {view===0 ? <div ref={belt} className="conveyor" onDragStart={event=>event.preventDefault()} role="region" aria-label="Product conveyor" tabIndex={0} onKeyDown={event=>{if(event.key==='ArrowLeft'){event.preventDefault();rotate(-1);}if(event.key==='ArrowRight'){event.preventDefault();rotate(1);}}} onPointerDown={event=>{pointer.current=event.clientX;swiped.current=false;}} onPointerUp={event=>{if(pointer.current!==null && Math.abs(event.clientX-pointer.current)>45){swiped.current=true;rotate(event.clientX<pointer.current?1:-1);}pointer.current=null;}} onPointerCancel={()=>{pointer.current=null;}}>
       {products.map((product,index)=>{
         let distance=(index-center+products.length)%products.length;
@@ -44,12 +44,9 @@ export default function Gallery() {
           {active ? <Link to={`/products/${product.slug}`} onClick={event=>{if(swiped.current)event.preventDefault();}}>{visual}</Link> : <button tabIndex={hidden?-1:0} aria-hidden={hidden} aria-label={`Center ${product.name}`} onClick={()=>{if(!swiped.current)setCenter(index);}}>{visual}</button>}
         </div>;
       })}
-      <button className="belt-arrow previous" aria-label="Previous product" onClick={()=>rotate(-1)}>←</button><button className="belt-arrow next" aria-label="Next product" onClick={()=>rotate(1)}>→</button>
       <div className="belt-position" aria-live="polite">{String(center+1).padStart(2,'0')} / {String(products.length).padStart(2,'0')}</div>
-    </div> : view===1 ? <div className={`scatter-stage arrangement-${arrangement}`}>
-      {products.map((product,index)=><Link key={product.slug} className={`scatter-object object-${index}`} to={`/products/${product.slug}`}><Artwork kind={product.art}/><span>{product.name}</span></Link>)}
-      <button className="rearrange-control" onClick={()=>setArrangement(value=>(value+1)%3)}>rearrange ↻</button>
-    </div> : <div className="product-grid">{products.map((product,index)=><Link key={product.slug} to={`/products/${product.slug}`}><div className="grid-art"><Artwork kind={product.art}/></div><span className="grid-label"><span>{product.name}</span><span>{String(index+1).padStart(2,'0')}</span></span></Link>)}</div>}
-    <div className="view-bar"><ViewControls labels={views} active={view} onChange={change}/><p className="space-hint">click the space to change the view</p></div>
+    </div> : view===1 ? <div className="scatter-stage" role="region" aria-label="Scattered products. Click empty space or press Space to rearrange." tabIndex={0} onKeyDown={event=>{if(event.target===event.currentTarget && (event.key===' ' || event.key==='Enter')){event.preventDefault();setArrangement(value=>(value+1)%products.length);}}}>
+      {products.map((product,index)=><Link key={product.slug} className={`scatter-object scatter-slot-${(index+arrangement*7)%products.length}`} to={`/products/${product.slug}`} aria-label={product.name}><Artwork kind={product.art}/></Link>)}
+    </div> : <div className="product-grid">{products.map(product=><Link key={product.slug} to={`/products/${product.slug}`} aria-label={product.name}><div className="grid-art"><Artwork kind={product.art}/></div></Link>)}</div>}
   </section>;
 }

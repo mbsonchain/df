@@ -20,7 +20,7 @@ function WorldClocks() {
   const [paused, setPaused] = useState(false);
   return <div className={`world-clock ${paused ? 'is-paused' : ''}`}>
     <div className="clock-track">{[0,1].map(copy => <div className="clock-run" key={copy} aria-hidden={copy === 1}>
-      {locations.map(place => <span key={place.id} className="city-clock"><span>{place.name}</span><time>{timeAt(now,place.zone)}</time><span className="clock-star">✳</span></span>)}
+      {locations.map(place => <span key={place.id} className="city-clock"><span>{place.name}</span><time>{timeAt(now,place.zone)}</time></span>)}
     </div>)}</div>
     <button className="clock-pause" aria-label={paused ? 'Resume moving clocks' : 'Pause moving clocks'} onClick={() => setPaused(!paused)}>{paused ? '▷' : 'Ⅱ'}</button>
   </div>;
@@ -71,6 +71,6 @@ export function Shell({children}: {children:React.ReactNode}) {
       <nav className="nav-right" aria-label="Network and cart"><NavLink to="/network">network</NavLink><NavLink to="/cart">cart</NavLink></nav>
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock/><nav aria-label="Return navigation">{!home && <Link to="/">home</Link>}<Link to={destination}>{network ? 'gallery' : 'network'} ↗</Link></nav></footer>
+    <footer className="site-footer"><LocalClock/>{!home && <nav aria-label="Return navigation"><Link to="/">home</Link><Link to={destination}>{network ? 'gallery' : 'network'} ↗</Link></nav>}</footer>
   </div>;
 }
