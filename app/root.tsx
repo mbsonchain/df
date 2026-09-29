@@ -1,9 +1,12 @@
 import {useNonce} from '@shopify/hydrogen';
 import {Links, Meta, Outlet, Scripts, ScrollRestoration} from 'react-router';
 import {Shell} from '~/components/Shell';
+import {MobilePreview} from '~/components/MobilePreview';
+import {homeOnly} from '~/lib/launch';
 import skeletonStyles from '~/styles/skeleton.css?url';
+import mobileStyles from '~/styles/mobile.css?url';
 
-export function links() {return [{rel: 'stylesheet', href: 'https://use.typekit.net/sji2png.css'}, {rel: 'stylesheet', href: skeletonStyles}];}
+export function links() {return [{rel: 'stylesheet', href: 'https://use.typekit.net/sji2png.css'}, {rel: 'stylesheet', href: skeletonStyles}, {rel: 'stylesheet', href: mobileStyles}];}
 
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
@@ -17,7 +20,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <Links />
       </head>
       <body>
-        {children}
+        {homeOnly ? children : <MobilePreview>{children}</MobilePreview>}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
