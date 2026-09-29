@@ -1,3 +1,3 @@
 import {redirect} from 'react-router';
 
-export function loader() {return redirect('/amore');}
+export function loader() {return redirect('/collection');}

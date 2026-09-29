@@ -17,7 +17,7 @@ export function NetworkPaper() {
     </article>)}
     {projects.map((project, index) => <article className="paper-cell" key={project.slug}>
       <Link className="paper-card paper-project" to={`/network/projects/${project.slug}`} aria-labelledby={`paper-${project.slug}`}>
-        <div className="paper-meta"><span>stuff / {String(index + 1).padStart(2, '0')}</span><span>{project.category}</span></div>
+        <div className="paper-meta"><span>formal / {String(index + 1).padStart(2, '0')}</span><span>{project.category}</span></div>
         <div className="paper-visual"><img src={project.image} alt="" loading="lazy"/></div>
         <div className="paper-copy"><h2 id={`paper-${project.slug}`}>{project.title}</h2><p>{project.note}</p></div>
       </Link>

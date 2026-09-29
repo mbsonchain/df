@@ -1,9 +1,3 @@
-export function meta() {return [{title: 'Amore — Formal'}];}
+import {redirect} from 'react-router';
 
-export default function Amore() {
-  return <article className="about-page amore-page" aria-labelledby="amore-heading">
-    <section className="about-section">
-      <h1 id="amore-heading">AMORE</h1>
-    </section>
-  </article>;
-}
+export function loader() {return redirect('/collection');}
