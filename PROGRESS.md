@@ -9,11 +9,11 @@ Matteo approved publishing the current homepage to desertformal.com, with naviga
 - White background; original Articulat FORMAL wordmark, Courier-style small typography and pink flower. Home has the stationary wordmark, compact navigation and centered lowercase regional brand, location and seconds clock.
 - White six-city moving strip everywhere: Kilauea, Conamore (Los Angeles time), CDMX, London, Milano and Copenhagen. It is inset from the top, keeps moving on hover and has an explicit pause control.
 - Gallery and Network use the same flower and navigation sizes as Home. Clicking the flower switches between them in preview.
-- Gallery navigation: gallery / single — flower — multi / capsule. Active view is pink. Single shows three products, with a large center item, side-item click to center, and scroll/swipe navigation. Multi shows one centered row of five; empty-space clicks advance through four groups covering 20 studies. Product clicks open their details. Capsule shows all 20 without labels.
-- Network navigation: network / live — flower — projects / all. Live is a journal with floating artifacts tied to the active editorial section. Projects is the image-only rotating/rearranging project scene; All is the combined index.
+- Gallery navigation: gallery / single — flower — all / conamore. Active view is pink. Single shows five products: a large center item, smaller neighbors and two even smaller outer items. Clicking anywhere on either side moves exactly one product; the center opens its detail. Scroll, swipe and keyboard arrows also navigate. All is the compact, unlabeled collection grid of 20 studies. Multi has been removed. Conamore is a separate blank page with an About-style heading and layout; /collection and /amore redirect to /conamore. Legacy Multi and Capsule query links show All.
+- Network navigation: network / desert — flower — formal / explore. Desert retains the journal and its scroll-linked artifacts. Formal retains the rotating/rearranging project scene. Explore is a newspaper-like grid of six square panels linking to the three current stories and three projects. Legacy Live, Projects, Portfolio, Stuff, All and Everything query links still work.
 - Inner footers have regional brand left, location and HH:MM:SS centered, and only home at right. Everything is lowercase in the same ink color. Time-zone estimation selects the location naturally, without a prompt or manual selector. Kilauea uses Island Formal, Conamore/CDMX use Desert Formal, and the European locations use Spazio Libero.
-- About has three centered uppercase blocks: FORMAL, DESERT FORMAL, CONAMORE, with generous spacing and separate placeholder copy. Conamore is one word.
-- Cart is a dedicated page; studies are not purchasable. Real collection data and complete commerce verification remain for later.
+- About has three centered uppercase blocks: FORMAL, DESERT FORMAL, PURCHASING, with generous spacing and separate placeholder copy. Home and About are fixed to the viewport without vertical scrolling. About sizes its three complete sections, social links and copyright to the available space. Its header and flower remain compact. Beneath Purchasing are small Instagram (@desertformal), YouTube (@strikeout-studios) and Strikeout (strikeout.us) links, followed by the copyright. The Gallery subpage is now Conamore. The separate Conamore brand and clock location keep their name.
+- Cart uses small lowercase monospaced text and a compact header. Its empty state reads “your cart is empty.” and “how to purchase”. The entire highlighted phrase links to /about#purchasing. This is an anchor link only, not an email signup yet. Studies are not purchasable; real collection data and complete commerce verification remain for later.
 
 ## Next stages, in order
 
@@ -29,3 +29,9 @@ Do not add paid subscriptions or build the future stages without a further reque
 GitHub repository: mbsonchain/df. Working branch: desert-formal-skeleton. Public release branch: main. The About revision is saved in commit d8d164961118da497dc9aa245c23aedd28b9dad6, followed by the homepage release checkpoint.
 
 Original Strikeout theme: local backup `backups/strikeout-2026-09-22/theme/` in the websites workspace; Shopify duplicate theme 166894043367 preserves original theme 154397507815. Do not overwrite or delete these backups.
+
+## Latest preview revision
+
+The Gallery, newspaper index, About and Cart revisions are preview-only. Keep the current public homepage release on main. Matteo reported fixing public-domain access before this design pass; independent browser verification is still blocked by the browser policy service.
+
+The navigation label is store across the private preview, including after opening it. The Store page heading and browser title use the same name. The existing /cart route, cart behavior and empty-cart wording stay unchanged.

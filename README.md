@@ -22,7 +22,7 @@ Push design updates to `desert-formal-skeleton`. GitHub Actions builds and deplo
 
 ## Content and saved progress
 
-Editable sample content lives under `app/content/`, separately from layout and styles. These are design studies, not purchasable products. About has three centered placeholder sections: FORMAL, DESERT FORMAL and CONAMORE. The flower source is in `app/content/site.ts` and can be replaced through Shopify Files.
+Editable sample content lives under `app/content/`, separately from layout and styles. These are design studies, not purchasable products. About has three centered placeholder sections: FORMAL, DESERT FORMAL and PURCHASING. The flower source is in `app/content/site.ts` and can be replaced through Shopify Files.
 
 See [PROGRESS.md](PROGRESS.md) for the accepted direction and next stages. The original Strikeout theme has a separate local backup and saved Shopify duplicate; it is not replaced by this application.
 
