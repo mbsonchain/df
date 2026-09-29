@@ -63,10 +63,10 @@ function LocalClock() {
 export function Shell({children}: {children:React.ReactNode}) {
   const {pathname} = useLocation();
   const [params] = useSearchParams();
-  const section = pathname === '/gallery' || pathname === '/collection' ? 'gallery' : pathname === '/network' ? 'network' : null;
+  const section = pathname === '/gallery' || pathname === '/conamore' ? 'gallery' : pathname === '/network' ? 'network' : null;
   const labels = section === 'gallery' ? galleryViews : networkViews;
   const viewLinks = section === 'gallery' ? galleryViewLinks : networkViewLinks;
-  const activeView = pathname === '/collection' ? 2 : section ? viewIndex(section, params.get('view')) : -1;
+  const activeView = pathname === '/conamore' ? 2 : section ? viewIndex(section, params.get('view')) : -1;
   const home = pathname === '/';
   const fixedPage = home || pathname === '/about';
   const network = pathname.startsWith('/network') || pathname === '/website';
