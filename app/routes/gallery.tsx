@@ -2,18 +2,12 @@ import {useEffect, useRef, useState} from 'react';
 import {Link, useSearchParams} from 'react-router';
 import {products} from '~/content/editorial';
 import {Artwork} from '~/components/Artwork';
-import {isWhitespace} from '~/components/ViewControls';
 import {viewIndex} from '~/content/views';
 export function meta() {return [{title:'Gallery — Formal'}];}
 export default function Gallery() {
   const [params] = useSearchParams();
   const view = viewIndex('gallery', params.get('view'));
   const [center,setCenter] = useState(0);
-  const [group,setGroup] = useState(0);
-  const groupSize = 5;
-  const groupCount = Math.ceil(products.length / groupSize);
-  const visibleProducts = products.slice(group * groupSize, (group + 1) * groupSize);
-  const nextGroup = (direction = 1) => setGroup(current => (current + direction + groupCount) % groupCount);
   const belt = useRef<HTMLDivElement>(null);
   const wheelAt = useRef(0);
   const pointer = useRef<number | null>(null);
@@ -33,7 +27,7 @@ export default function Gallery() {
     element.addEventListener('wheel',wheel,{passive:false});
     return ()=>element.removeEventListener('wheel',wheel);
   },[view]);
-  return <section className={`gallery-page gallery-view-${view}`} aria-label="Product gallery" onClick={event=>{if(swiped.current){swiped.current=false;return;}if(view===1 && isWhitespace(event))nextGroup();}}>
+  return <section className={`gallery-page gallery-view-${view}`} aria-label="Product gallery" onClick={()=>{swiped.current=false;}}>
     {view===0 ? <div ref={belt} className="conveyor" onDragStart={event=>event.preventDefault()} role="region" aria-label="Single product view" tabIndex={0} onKeyDown={event=>{if(event.key==='ArrowLeft'){event.preventDefault();rotate(-1);}if(event.key==='ArrowRight'){event.preventDefault();rotate(1);}}} onPointerDown={event=>{pointer.current=event.clientX;swiped.current=false;}} onPointerUp={event=>{if(pointer.current!==null && Math.abs(event.clientX-pointer.current)>45){swiped.current=true;rotate(event.clientX<pointer.current?1:-1);}pointer.current=null;}} onPointerCancel={()=>{pointer.current=null;}}>
       {products.map((product,index)=>{
         let distance=(index-center+products.length)%products.length;
@@ -46,9 +40,6 @@ export default function Gallery() {
         </div>;
       })}
       <div className="belt-position" aria-live="polite">{String(center+1).padStart(2,'0')} / {String(products.length).padStart(2,'0')}</div>
-    </div> : view===1 ? <div className="multi-stage" role="region" aria-label="Multi product view. Click empty space or press Space for the next five products." tabIndex={0} onKeyDown={event=>{if(event.target!==event.currentTarget)return;if([' ','Enter','ArrowRight','ArrowLeft'].includes(event.key)){event.preventDefault();nextGroup(event.key==='ArrowLeft'?-1:1);}}}>
-      <div className="multi-row" key={group}>{visibleProducts.map(product=><Link key={product.slug} className="multi-object" to={`/products/${product.slug}`} aria-label={product.name}><Artwork kind={product.art}/></Link>)}</div>
-      <span className="sr-only" aria-live="polite">Group {group+1} of {groupCount}</span>
     </div> : <div className="product-grid">{products.map(product=><Link key={product.slug} to={`/products/${product.slug}`} aria-label={product.name}><div className="grid-art"><Artwork kind={product.art}/></div></Link>)}</div>}
   </section>;
 }

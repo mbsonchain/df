@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Link, NavLink, useLocation, useSearchParams} from 'react-router';
 import {identity, locations} from '~/content/site';
-import {galleryViews, networkViews, galleryViewKeys, networkViewKeys, viewIndex} from '~/content/views';
+import {galleryViews, networkViews, galleryViewLinks, networkViewLinks, viewIndex} from '~/content/views';
 import {homeOnly} from '~/lib/launch';
 
 function EntryLink({to, children}: {to:string; children:React.ReactNode}) {
@@ -63,13 +63,13 @@ function LocalClock() {
 export function Shell({children}: {children:React.ReactNode}) {
   const {pathname} = useLocation();
   const [params] = useSearchParams();
-  const section = pathname === '/gallery' ? 'gallery' : pathname === '/network' ? 'network' : null;
+  const section = pathname === '/gallery' || pathname === '/conamore' ? 'gallery' : pathname === '/network' ? 'network' : null;
   const labels = section === 'gallery' ? galleryViews : networkViews;
-  const keys = section === 'gallery' ? galleryViewKeys : networkViewKeys;
-  const activeView = section ? viewIndex(section, params.get('view')) : -1;
+  const viewLinks = section === 'gallery' ? galleryViewLinks : networkViewLinks;
+  const activeView = pathname === '/conamore' ? 2 : section ? viewIndex(section, params.get('view')) : -1;
   const home = pathname === '/';
   const network = pathname.startsWith('/network') || pathname === '/website';
-  const gallery = pathname === '/gallery' || pathname.startsWith('/products');
+  const gallery = section === 'gallery' || pathname.startsWith('/products');
   const destination = network ? '/gallery' : '/network';
   const flower = <>
     <span className={`flower-weight ${gallery ? 'selected' : ''}`} aria-hidden="true"/>
@@ -79,12 +79,12 @@ export function Shell({children}: {children:React.ReactNode}) {
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     <a href="#main" className="skip-link">Skip to content</a>
     <WorldClocks />
-    <header className={`site-header ${home || section ? 'compact-header' : ''}`}>
-      {section ? <nav className="nav-left" aria-label={`${section} views`}><Link className="section-link" to={`/${section}`}>{section}</Link><Link className="view-link" to={`/${section}?view=${keys[0]}`} aria-current={activeView === 0 ? 'page' : undefined}>{labels[0]}</Link></nav> : <nav className="nav-left" aria-label="Gallery and information"><EntryLink to="/gallery">gallery</EntryLink><EntryLink to="/about">about</EntryLink></nav>}
+    <header className={`site-header ${home || section || pathname === '/about' || pathname === '/cart' ? 'compact-header' : ''}`}>
+      {section ? <nav className="nav-left" aria-label={`${section} views`}><Link className="section-link" to={`/${section}`}>{section}</Link><Link className="view-link" to={viewLinks[0]} aria-current={activeView === 0 ? 'page' : undefined}>{labels[0]}</Link></nav> : <nav className="nav-left" aria-label="Gallery and information"><EntryLink to="/gallery">gallery</EntryLink><EntryLink to="/about">about</EntryLink></nav>}
       {homeOnly
         ? <span className="flower-switch locked-entry" role="link" aria-disabled="true" aria-label="Formal flower">{flower}</span>
         : <Link className="flower-switch" to={destination} aria-label={`Switch to ${network ? 'gallery' : 'network'}`}>{flower}</Link>}
-      {section ? <nav className="nav-right" aria-label={`More ${section} views`}>{[1,2].map(index => <Link key={keys[index]} className="view-link" to={`/${section}?view=${keys[index]}`} aria-current={activeView === index ? 'page' : undefined}>{labels[index]}</Link>)}</nav> : <nav className="nav-right" aria-label="Network and cart"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">cart</EntryLink></nav>}
+      {section ? <nav className="nav-right" aria-label={`More ${section} views`}>{[1,2].map(index => <Link key={viewLinks[index]} className="view-link" to={viewLinks[index]} aria-current={activeView === index ? 'page' : undefined}>{labels[index]}</Link>)}</nav> : <nav className="nav-right" aria-label="Network and cart"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">cart</EntryLink></nav>}
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
     <footer className="site-footer"><LocalClock/>{!home && <nav aria-label="Return navigation"><Link to="/">home</Link></nav>}</footer>
