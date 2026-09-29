@@ -63,11 +63,12 @@ function LocalClock() {
 export function Shell({children}: {children:React.ReactNode}) {
   const {pathname} = useLocation();
   const [params] = useSearchParams();
-  const section = pathname === '/gallery' || pathname === '/conamore' ? 'gallery' : pathname === '/network' ? 'network' : null;
+  const section = pathname === '/gallery' || pathname === '/amore' ? 'gallery' : pathname === '/network' ? 'network' : null;
   const labels = section === 'gallery' ? galleryViews : networkViews;
   const viewLinks = section === 'gallery' ? galleryViewLinks : networkViewLinks;
-  const activeView = pathname === '/conamore' ? 2 : section ? viewIndex(section, params.get('view')) : -1;
+  const activeView = pathname === '/amore' ? 2 : section ? viewIndex(section, params.get('view')) : -1;
   const home = pathname === '/';
+  const fixedPage = home || pathname === '/about';
   const network = pathname.startsWith('/network') || pathname === '/website';
   const gallery = section === 'gallery' || pathname.startsWith('/products');
   const destination = network ? '/gallery' : '/network';
@@ -76,7 +77,7 @@ export function Shell({children}: {children:React.ReactNode}) {
     <img src={identity.flower} alt="Formal flower" width="110" height="118"/>
     <span className={`flower-weight ${network ? 'selected' : ''}`} aria-hidden="true"/>
   </>;
-  return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
+  return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${fixedPage ? 'is-fixed-page' : ''} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     <a href="#main" className="skip-link">Skip to content</a>
     <WorldClocks />
     <header className={`site-header ${home || section || pathname === '/about' || pathname === '/cart' ? 'compact-header' : ''}`}>

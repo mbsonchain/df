@@ -9,7 +9,7 @@ async function loadLaunch(env) {
   });
   return import('data:text/javascript;base64,' + Buffer.from(outputText).toString('base64'));
 }
-const routes = ['/gallery', '/gallery?view=capsule', '/about', '/conamore', '/conamore.data', '/network', '/network/posts/a-story', '/network/projects/strikeout', '/products/study-01', '/cart', '/website', '/about.data', '/cart.data', '/network.data', '/gallery/', '/not-yet-built'];
+const routes = ['/gallery', '/gallery?view=capsule', '/about', '/conamore', '/conamore.data', '/amore', '/amore.data', '/network', '/network/posts/a-story', '/network/projects/strikeout', '/products/study-01', '/cart', '/website', '/about.data', '/cart.data', '/network.data', '/gallery/', '/not-yet-built'];
 
 for (const preview of [undefined, 'false', 'TRUE']) {
   const {homeOnly, launchResponse} = await loadLaunch({DEV: false, VITE_FORMAL_PREVIEW: preview});

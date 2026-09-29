@@ -1,9 +1,3 @@
-export function meta() {return [{title: 'Conamore — Formal'}];}
+import {redirect} from 'react-router';
 
-export default function Conamore() {
-  return <article className="about-page conamore-page" aria-labelledby="conamore-heading">
-    <section className="about-section">
-      <h1 id="conamore-heading">CONAMORE</h1>
-    </section>
-  </article>;
-}
+export function loader() {return redirect('/amore');}
