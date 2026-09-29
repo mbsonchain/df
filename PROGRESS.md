@@ -34,4 +34,4 @@ Original Strikeout theme: local backup `backups/strikeout-2026-09-22/theme/` in 
 
 The Gallery, newspaper index, About and Cart revisions are preview-only. Keep the current public homepage release on main. Matteo reported fixing public-domain access before this design pass; independent browser verification is still blocked by the browser policy service.
 
-Homepage navigation label updated from cart to store in the private preview. It continues to open the existing cart page; other page menus retain their cart label.
+The navigation label is store across the private preview, including after opening it. The Store page heading and browser title use the same name. The existing /cart route, cart behavior and empty-cart wording stay unchanged.
