@@ -84,7 +84,7 @@ export function Shell({children}: {children:React.ReactNode}) {
       {homeOnly
         ? <span className="flower-switch locked-entry" role="link" aria-disabled="true" aria-label="Formal flower">{flower}</span>
         : <Link className="flower-switch" to={destination} aria-label={`Switch to ${network ? 'gallery' : 'network'}`}>{flower}</Link>}
-      {section ? <nav className="nav-right" aria-label={`More ${section} views`}>{[1,2].map(index => <Link key={viewLinks[index]} className="view-link" to={viewLinks[index]} aria-current={activeView === index ? 'page' : undefined}>{labels[index]}</Link>)}</nav> : <nav className="nav-right" aria-label="Network and cart"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">cart</EntryLink></nav>}
+      {section ? <nav className="nav-right" aria-label={`More ${section} views`}>{[1,2].map(index => <Link key={viewLinks[index]} className="view-link" to={viewLinks[index]} aria-current={activeView === index ? 'page' : undefined}>{labels[index]}</Link>)}</nav> : <nav className="nav-right" aria-label={home ? "Network and store" : "Network and cart"}><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">{home ? 'store' : 'cart'}</EntryLink></nav>}
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
     <footer className="site-footer"><LocalClock/>{!home && <nav aria-label="Return navigation"><Link to="/">home</Link></nav>}</footer>
