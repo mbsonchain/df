@@ -89,11 +89,10 @@ export function Shell({children}: {children:React.ReactNode}) {
       <nav className="nav-left" aria-label="Gallery and information"><EntryLink to="/gallery">gallery</EntryLink><EntryLink to="/about">about</EntryLink></nav>
       <div className="flower-center">
         <Link className="flower-switch" to="/" aria-label="Home">{flower}</Link>
-        {section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}
       </div>
       <nav className="nav-right" aria-label="Network and store"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">store</EntryLink></nav>
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock/></footer>
+    <footer className="site-footer"><LocalClock/>{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
   </div>;
 }
