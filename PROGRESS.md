@@ -48,4 +48,4 @@ Amsterdam (Europe/Amsterdam) and Cape Town (Africa/Johannesburg) are included in
 
 The top clocks sort from earliest to latest UTC offset, recalculating each minute so daylight-saving changes stay in order. Equal-time cities retain their existing relative order.
 
-The homepage has a hand-drawn pink anarchy symbol layered over the original black A in FORMAL. Its color (#efaec0) is sampled from the flower petals, and the independent SVG scales with the letter on desktop and mobile. This revision is preview-only.
+The homepage has a classic circled-A anarchy symbol with spray-paint grain and overspray layered over the original black A in FORMAL. Its color (#efaec0) is sampled from the flower petals, and the independent SVG scales with the letter on desktop and mobile. This revision is preview-only.
