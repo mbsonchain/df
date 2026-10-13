@@ -42,8 +42,15 @@ function WorldClocks() {
 }
 function LocalClock() {
   const now = useClock();
-  const [placeId, setPlaceId] = useState<string>('milano');
+  const [params] = useSearchParams();
+  // Location simulation is confined to the independent mobile review branch.
+  const [previewPlaceId] = useState(() => {
+    const requested = params.get('previewCity');
+    return locations.find(place => place.id === requested)?.id ?? null;
+  });
+  const [placeId, setPlaceId] = useState<string>(previewPlaceId ?? 'milano');
   useEffect(() => {
+    if (previewPlaceId) return;
     const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const exact = locations.find(place => place.zone === zone);
     if (exact) {setPlaceId(exact.id); return;}
@@ -60,7 +67,7 @@ function LocalClock() {
       return distance(a)-distance(b) || (northernEurope ? Number(b.id==='copenhagen')-Number(a.id==='copenhagen') : 0);
     });
     setPlaceId(ranked[0].id);
-  }, []);
+  }, [previewPlaceId]);
   const place = locations.find(item => item.id === placeId) ?? locations[4];
   return <div className="local-clock"><span className="local-brand"><FormalText>{place.brand}</FormalText></span><div>
     <span className="location-name">{place.name}</span>
