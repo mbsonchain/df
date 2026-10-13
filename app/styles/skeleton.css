@@ -44,3 +44,7 @@ html:has(.is-fixed-page),body:has(.is-fixed-page){overflow:hidden;overscroll-beh
 .is-fixed-page .about-colophon nav{margin:0 0 5px;gap:24px}
 .is-fixed-page .about-colophon a{padding:4px 0}
 @media(max-height:600px){.is-fixed-page>.world-clock{height:26px;line-height:26px;margin-top:8px}.is-fixed-page .clock-pause{height:26px}.is-fixed-page>.site-header{height:70px}.is-fixed-page>.site-footer{min-height:44px;padding-top:8px;padding-bottom:8px}.is-fixed-page .about-section p{line-height:1.4}.is-fixed-page .about-page{gap:5px;padding-top:3px;padding-bottom:3px}.is-fixed-page .about-colophon nav{margin-bottom:0}}
+
+/* A separate pen mark, sampled from the flower petals. */
+.formal-marked-letter{position:relative}
+.formal-anarchy{position:absolute;left:calc(50% + .0375em);top:50%;width:1.04em;height:1.04em;color:#efaec0;transform:translate(-50%,-50%) rotate(-9deg);pointer-events:none;overflow:visible}
