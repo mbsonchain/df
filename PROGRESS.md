@@ -77,3 +77,5 @@ The Store empty state now reads “your store is empty.” Desktop About text st
 Enlarged the footer switches with 44px-high clickable controls, while labels inherit the same font size as the footer (11px desktop, 9px phone, 8px compact phone), as Matteo clarified. Desktop switch tracks are 44×24px; phones use 40×22px tracks (36px wide on compact phones). Gallery labels wrap within the same centered control at 370px and below so the name and longest city/time still fit without overlap. Footer alignment remains unchanged.
 
 All three About headings are uppercase again: FORMAL, DESERT FORMAL and HOW TO PURCHASE. Body copy remains lowercase apart from FORMAL.
+
+The flower dots are removed. Active main navigation is pink, with the other links black and regular weight. Product detail pages highlight Gallery; nested Network pages highlight Network.
