@@ -1,0 +1,28 @@
+/* Mobile design workspace. Changes here are isolated from the desktop branch. */
+.mobile-preview-workspace {
+  min-height: 100svh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #f4f3f2;
+}
+.mobile-preview-label {
+  font: 10px/1.4 var(--mono);
+  color: #666;
+}
+.mobile-preview-frame {
+  display: block;
+  width: 390px;
+  height: min(844px, calc(100svh - 92px));
+  border: 1px solid #ddd;
+  border-radius: 18px;
+  background: #fff;
+}
+@media (max-width: 760px) {
+  .is-fixed-page .formal-wordmark {
+    font-size: min(18vw, 45cqh, 290px);
+  }
+}

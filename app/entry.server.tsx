@@ -6,6 +6,7 @@ import {
   type HydrogenRouterContextProvider,
 } from '@shopify/hydrogen';
 import type {EntryContext} from 'react-router';
+import {homeOnly} from '~/lib/launch';
 
 export default async function handleRequest(
   request: Request,
@@ -15,6 +16,8 @@ export default async function handleRequest(
   context: HydrogenRouterContextProvider,
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    frameAncestors: homeOnly ? ["'none'"] : ["'self'"],
+    frameSrc: ["'self'"],
     styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net'],
     fontSrc: ["'self'", 'https://use.typekit.net', 'https://cdn.shopify.com'],
     shop: {
