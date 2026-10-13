@@ -93,6 +93,6 @@ export function Shell({children}: {children:React.ReactNode}) {
       <nav className="nav-right" aria-label="Network and store"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">store</EntryLink></nav>
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock/>{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
+    <footer className="site-footer"><LocalClock/>{pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
   </div>;
 }
