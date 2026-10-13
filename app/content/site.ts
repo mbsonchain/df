@@ -17,6 +17,19 @@ export const clockLocations = [
   {id:'amsterdam', name:'Amsterdam', zone:'Europe/Amsterdam'},
   {id:'cape-town', name:'Cape Town', zone:'Africa/Johannesburg'},
 ] as const;
+// Sort by the current UTC offset so daylight-saving transitions stay correct.
+export function clockLocationsByTime(at: Date) {
+  return clockLocations.map(place => {
+    const label = new Intl.DateTimeFormat('en-US', {
+      timeZone: place.zone, timeZoneName: 'shortOffset',
+    }).formatToParts(at).find(part => part.type === 'timeZoneName')?.value ?? 'GMT';
+    const match = label.match(/GMT([+-])(\d+)(?::(\d+))?/);
+    const offset = match
+      ? (match[1] === '-' ? -1 : 1) * (Number(match[2]) * 60 + Number(match[3] ?? 0))
+      : 0;
+    return {place, offset};
+  }).sort((a, b) => a.offset - b.offset).map(item => item.place);
+}
 export const projects = [
   {slug:'strikeout', title:'Strikeout', category:'Studio / ongoing', image:'https://cdn.shopify.com/s/files/1/0690/9103/3319/files/network-strikeout.png?width=700', note:'A space for images, ideas, and things in motion.'},
   {slug:'dopo', title:'Dopo', category:'Project / ongoing', image:'https://cdn.shopify.com/s/files/1/0690/9103/3319/files/network-dopo.png?width=700', note:'Something to return to. A project taking shape.'},

@@ -45,3 +45,5 @@ The navigation label is store across the private preview, including after openin
 London and Copenhagen use Freetown Formal. Milano keeps Spazio Libero.
 
 Amsterdam (Europe/Amsterdam) and Cape Town (Africa/Johannesburg) are included in the top clock strip. They do not change the footer’s regional location selection.
+
+The top clocks sort from earliest to latest UTC offset, recalculating each minute so daylight-saving changes stay in order. Equal-time cities retain their existing relative order.
