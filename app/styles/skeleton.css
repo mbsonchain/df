@@ -50,4 +50,4 @@ html:has(.is-fixed-page),body:has(.is-fixed-page){overflow:hidden;overscroll-beh
 .formal-anarchy{position:absolute;left:calc(50% + .0375em);top:50%;width:1.04em;height:1.102em;color:#efaec0;transform:translate(-50%,-50%);pointer-events:none;overflow:visible}
 
 /* Approved phone wordmark sizing, shared by the public responsive site. */
-@media(max-width:760px){.is-fixed-page .formal-wordmark{font-size:min(18vw,45cqh,290px)}}
+@media(max-width:760px){.is-fixed-page .formal-wordmark{font-size:min(18vw,45cqh,290px)}.is-fixed-page .about-section p{font-size:clamp(8px,min(1.8cqh,2.55vw),10px)}}
