@@ -69,3 +69,14 @@ html:has(.is-fixed-page),body:has(.is-fixed-page){overflow:hidden;overscroll-beh
 /* Match the homepage header position on every route and screen size. */
 .site-shell>.site-header{width:100%;height:clamp(80px,15svh,132px)}
 @media(max-height:600px){.site-shell>.world-clock{height:26px;line-height:26px;margin-top:8px}.site-shell .clock-pause{height:26px}.site-shell>.site-header{height:70px}.site-shell>.site-footer{min-height:44px;padding-top:8px;padding-bottom:8px}}
+
+/* A roomier desktop About page, with its copyright on the shared footer line. */
+.about-footer-copyright{display:none}
+@media(min-width:761px){
+  .is-fixed-page .about-page{padding-top:clamp(24px,6cqh,44px);padding-bottom:clamp(26px,7cqh,48px)}
+  .is-fixed-page .about-colophon{font-size:12px;line-height:1.5}
+  .is-fixed-page .about-colophon nav{margin:0;gap:36px}
+  .is-fixed-page .about-colophon a{padding:6px 0}
+  .is-fixed-page .about-colophon>p{display:none}
+  .about-footer-copyright{display:block;grid-column:2;grid-row:1;justify-self:center;white-space:nowrap;font:inherit}
+}

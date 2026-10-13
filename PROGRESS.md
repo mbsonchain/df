@@ -13,7 +13,7 @@ Matteo approved publishing the current homepage to desertformal.com, with naviga
 - Network has two views, desert and FORMAL, selected with the same toggle centered in the footer. Desert retains the journal and FORMAL retains the rearrangeable projects. Explore is removed; old Explore links fall back to desert. Story and project pages return to the appropriate remaining view.
 - Every footer, including Home, places the regional brand at left and the city with HH:MM:SS at right. The footer home link is removed. Regional branding remains lowercase except FORMAL, which is always uppercase.
 - About has three centered blocks with lowercase body copy: FORMAL, DESERT FORMAL, HOW TO PURCHASE, using Matteo’s supplied label, network and purchasing copy. Home and About are fixed to the viewport without vertical scrolling. About sizes its three complete sections, social links and copyright to the available space. Its header and flower remain compact. Beneath How to Purchase are small Instagram (@desertformal), YouTube (@strikeout-studios) and Strikeout (strikeout.us) links, followed by the copyright. The Gallery subpage is now Conamore. The separate Conamore brand and clock location keep their name.
-- Cart uses small lowercase monospaced text and a compact header. Its empty state reads “your cart is empty.” and “how to purchase”. The entire highlighted phrase links to /about#purchasing. This is an anchor link only, not an email signup yet. Studies are not purchasable; real collection data and complete commerce verification remain for later.
+- Cart uses small lowercase monospaced text and a compact header. Its empty state reads “your store is empty.” and “how to purchase”. The entire highlighted phrase links to /about#purchasing. This is an anchor link only, not an email signup yet. Studies are not purchasable; real collection data and complete commerce verification remain for later.
 
 ## Next stages, in order
 
@@ -34,7 +34,7 @@ Original Strikeout theme: local backup `backups/strikeout-2026-09-22/theme/` in 
 
 The Gallery, newspaper index, About and Cart revisions are preview-only. Keep the current public homepage release on main. Matteo reported fixing public-domain access before this design pass; independent browser verification is still blocked by the browser policy service.
 
-The navigation label is store across the private preview, including after opening it. The Store page heading and browser title use the same name. The existing /cart route, cart behavior and empty-cart wording stay unchanged.
+The navigation label is store across the private preview, including after opening it. The Store page heading and browser title use the same name. The existing /cart route and cart behavior remain; the empty message now reads “your store is empty.”
 
 ## Site roles confirmed October 13, 2026
 
@@ -67,3 +67,7 @@ Matteo requested permanent gallery/about/network/store links, the flower as the 
 ## Footer controls and header alignment — October 14, 2026
 
 Moved Gallery and Network view toggles into the center footer column, in the same row as the regional name at left and city/time at right. All routes now use the homepage header height and compact-screen clock spacing, so the navigation stays at the same vertical position on desktop and mobile. Narrow footer controls remain on a single line.
+
+## Store wording and desktop About spacing — October 14, 2026
+
+The Store empty state now reads “your store is empty.” Desktop About text starts a little lower. Social links are larger and sit higher above the bottom line; © year FORMAL is centered in the shared footer, aligned with the regional brand and city/time. Phone About keeps its existing layout and inline copyright.

@@ -49,20 +49,20 @@ try {
     return html;
   }
   const empty = await page('/cart');
-  assert.ok(empty.includes('your cart is empty.'));
+  assert.ok(empty.includes('your store is empty.'));
   assert.ok(empty.includes('href="/about#purchasing"'));
   assert.equal(requests, 0);
   assert.ok((await page('/')).includes('href="/cart"'));
   assert.ok((await page('/about')).includes('id="purchasing"'));
 
   reply = {data: {cart: null}};
-  assert.ok((await page('/cart', 'cart=expired-check')).includes('your cart is empty.'));
+  assert.ok((await page('/cart', 'cart=expired-check')).includes('your store is empty.'));
 
   reply = {data: {cart: filledCart}};
   const filled = await page('/cart', 'cart=valid-check');
   assert.ok(filled.includes('test shirt'));
   assert.ok(filled.includes('continue to checkout'));
-  assert.ok(!filled.includes('your cart is empty.'));
+  assert.ok(!filled.includes('your store is empty.'));
 
   for (const failure of [
     {data: {cart: null}, errors: [{message: 'Invalid cart id'}]},
@@ -73,7 +73,7 @@ try {
     assert.ok(recovered.includes('your cart couldn’t be loaded.'));
     assert.ok(recovered.includes('try again'));
     assert.ok(recovered.includes('href="/about#purchasing"'));
-    assert.ok(!recovered.includes('your cart is empty.'), 'Do not mislabel a failed lookup as empty');
+    assert.ok(!recovered.includes('your store is empty.'), 'Do not mislabel a failed lookup as empty');
     assert.ok((await page('/cart.data', 'cart=failed-check')).includes('cartUnavailable'));
   }
   console.log('Cart checks passed: empty, expired, populated, API error, connection failure, navigation data, and purchasing destination.');
