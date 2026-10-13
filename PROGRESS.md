@@ -88,3 +88,8 @@ The flower dots are removed. Active main navigation is pink, with the other link
 ## Mobile About footer — October 14, 2026
 
 Matteo clarified that mobile About should match desktop, rather than changing the toggles. On phones, © year FORMAL now sits in the center footer column with the regional name and city/time, using the same footer font. The earlier inline copyright is hidden; its spacing is retained below the social links so the existing mobile paragraph and social-link positions remain stable. Desktop and both view toggles are unchanged.
+
+
+## Static mobile Gallery all view — October 14, 2026
+
+On phones, Gallery view all now fits all 20 products into a fixed four-column, five-row grid between the header and footer. Artwork is smaller, capped at 64×72px and scales down when the screen is shorter. The page does not scroll and the mobile grid has no hover scaling. View one and desktop are unchanged.
