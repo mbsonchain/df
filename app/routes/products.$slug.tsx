@@ -1,7 +1,7 @@
 import {Link, useParams} from 'react-router';
 import {products} from '~/content/editorial';
 import {Artwork} from '~/components/Artwork';
-export function meta() {return [{title: 'An object — Desert Formal'}];}
+export function meta() {return [{title: 'An object — desert FORMAL'}];}
 export default function Product() {
   const {slug} = useParams();
   const product = products.find((item) => item.slug === slug);
