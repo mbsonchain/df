@@ -7,9 +7,10 @@ import {FormalText} from './FormalText';
 import {ViewToggle} from './ViewToggle';
 
 function EntryLink({to, children}: {to:string; children:React.ReactNode}) {
+  const {pathname} = useLocation();
   return homeOnly
     ? <span className="locked-entry" role="link" aria-disabled="true">{children}</span>
-    : <NavLink to={to}>{children}</NavLink>;
+    : <NavLink to={to} className={({isActive}) => isActive || (to === '/gallery' && pathname.startsWith('/products/')) ? 'active' : undefined}>{children}</NavLink>;
 }
 
 function useClock() {
@@ -78,9 +79,7 @@ export function Shell({children}: {children:React.ReactNode}) {
   const network = pathname.startsWith('/network') || pathname === '/website';
   const gallery = section === 'gallery' || pathname.startsWith('/products');
   const flower = <>
-    <span className={`flower-weight ${gallery ? 'selected' : ''}`} aria-hidden="true"/>
     <img src={identity.flower} alt="FORMAL flower" width="110" height="118"/>
-    <span className={`flower-weight ${network ? 'selected' : ''}`} aria-hidden="true"/>
   </>;
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${fixedPage ? 'is-fixed-page' : ''} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     <a href="#main" className="skip-link">Skip to content</a>
