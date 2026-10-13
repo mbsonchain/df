@@ -12,8 +12,8 @@ function Wordmark() {
   >
     <defs>
       <filter id="formal-brush-pink" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
-        {/* Red minus green isolates the reference ink and preserves its brush gaps. */}
-        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.492 -1.492 0 0 0" result="ink" />
+        {/* Boost reference ink coverage to solid pink while keeping white brush gaps transparent. */}
+        <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  3 -3 0 0 0" result="ink" />
         <feFlood floodColor="currentColor" result="pink" />
         <feComposite in="pink" in2="ink" operator="in" />
       </filter>
