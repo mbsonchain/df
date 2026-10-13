@@ -3,7 +3,7 @@ import {Link, useSearchParams} from 'react-router';
 import {products} from '~/content/editorial';
 import {Artwork} from '~/components/Artwork';
 import {viewIndex} from '~/content/views';
-export function meta() {return [{title:'Gallery — Formal'}];}
+export function meta() {return [{title:'Gallery — FORMAL'}];}
 export default function Gallery() {
   const [params] = useSearchParams();
   const view = viewIndex('gallery', params.get('view'));

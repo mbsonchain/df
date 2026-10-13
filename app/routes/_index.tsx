@@ -1,7 +1,7 @@
 import {Link} from 'react-router';
 import {homeOnly} from '~/lib/launch';
 
-export function meta() {return [{title:'Formal'}];}
+export function meta() {return [{title:'FORMAL'}];}
 
 function Wordmark() {
   return <>FORM<span className="formal-marked-letter">A<svg
@@ -23,8 +23,8 @@ function Wordmark() {
 }
 
 export default function Home() {
-  return <section className="landing" aria-label="Formal">{homeOnly
-    ? <span className="formal-wordmark locked-entry" role="link" aria-disabled="true" aria-label="Formal"><Wordmark /></span>
-    : <Link to="/gallery" className="formal-wordmark" aria-label="Formal — enter the gallery"><Wordmark /></Link>}
+  return <section className="landing" aria-label="FORMAL">{homeOnly
+    ? <span className="formal-wordmark locked-entry" role="link" aria-disabled="true" aria-label="FORMAL"><Wordmark /></span>
+    : <Link to="/gallery" className="formal-wordmark" aria-label="FORMAL — enter the gallery"><Wordmark /></Link>}
   </section>;
 }

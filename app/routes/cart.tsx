@@ -30,7 +30,7 @@ export async function action({request,context}:Route.ActionArgs){
   const headers=result.cart?.id?context.cart.setCartId(result.cart.id):new Headers();
   return data({error:result.errors?.[0]?.message??null},{headers});
 }
-export function meta(){return [{title:'Store — Formal'}];}
+export function meta(){return [{title:'Store — FORMAL'}];}
 export default function Cart(){
  const {cart,cartUnavailable}=useLoaderData<typeof loader>();const result=useActionData<typeof action>();const pending=useNavigation().state!=='idle';
  return <section className={`cart-page ${cart?.lines.nodes.length ? 'cart-has-items' : 'cart-is-empty'}`}>

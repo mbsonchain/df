@@ -1,4 +1,4 @@
-export function meta() {return [{title: 'Conamore — Formal'}];}
+export function meta() {return [{title: 'Conamore — FORMAL'}];}
 
 export default function Conamore() {
   return <article className="about-page conamore-page" aria-labelledby="conamore-heading">

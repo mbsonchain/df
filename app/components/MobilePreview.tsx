@@ -16,10 +16,10 @@ export function MobilePreview({children}: {children:React.ReactNode}) {
 
   if (!framed) return children;
   return <div className="mobile-preview-workspace">
-    <p className="mobile-preview-label">formal / mobile preview</p>
+    <p className="mobile-preview-label">FORMAL / mobile preview</p>
     <iframe
       className="mobile-preview-frame"
-      title="Formal mobile site"
+      title="FORMAL mobile site"
       src={location.pathname + location.search + location.hash}
     />
   </div>;
