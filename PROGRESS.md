@@ -83,3 +83,8 @@ Enlarged the footer switches with 44px-high clickable controls, while labels inh
 All three About headings are uppercase again: FORMAL, DESERT FORMAL and HOW TO PURCHASE. Body copy remains lowercase apart from FORMAL.
 
 The flower dots are removed. Active main navigation is pink, with the other links black and regular weight. Product detail pages highlight Gallery; nested Network pages highlight Network.
+
+
+## Mobile About footer — October 14, 2026
+
+Matteo clarified that mobile About should match desktop, rather than changing the toggles. On phones, © year FORMAL now sits in the center footer column with the regional name and city/time, using the same footer font. The earlier inline copyright is hidden; its spacing is retained below the social links so the existing mobile paragraph and social-link positions remain stable. Desktop and both view toggles are unchanged.
