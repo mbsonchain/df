@@ -71,3 +71,9 @@ Moved Gallery and Network view toggles into the center footer column, in the sam
 ## Store wording and desktop About spacing — October 14, 2026
 
 The Store empty state now reads “your store is empty.” Desktop About text starts a little lower. Social links are larger and sit higher above the bottom line; © year FORMAL is centered in the shared footer, aligned with the regional brand and city/time. Phone About keeps its existing layout and inline copyright.
+
+## Larger footer toggles — October 14, 2026
+
+Enlarged the footer switches with 44px-high clickable controls, while labels inherit the same font size as the footer (11px desktop, 9px phone, 8px compact phone), as Matteo clarified. Desktop switch tracks are 44×24px; phones use 40×22px tracks (36px wide on compact phones). Gallery labels wrap within the same centered control at 370px and below so the name and longest city/time still fit without overlap. Footer alignment remains unchanged.
+
+All three About headings are uppercase again: FORMAL, DESERT FORMAL and HOW TO PURCHASE. Body copy remains lowercase apart from FORMAL.
