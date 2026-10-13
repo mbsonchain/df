@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Link, NavLink, useLocation, useSearchParams} from 'react-router';
-import {identity, locations} from '~/content/site';
+import {identity, locations, clockLocations} from '~/content/site';
 import {galleryViews, networkViews, galleryViewLinks, networkViewLinks, viewIndex} from '~/content/views';
 import {homeOnly} from '~/lib/launch';
 
@@ -19,8 +19,8 @@ function useClock() {
   }, []);
   return now;
 }
-const formats = new Map<string, Intl.DateTimeFormat>(locations.map(place => [place.zone, new Intl.DateTimeFormat('en-GB', {timeZone:place.zone, hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false})]));
-function timeAt(now: Date | null, zone: typeof locations[number]['zone']) {
+const formats = new Map<string, Intl.DateTimeFormat>(clockLocations.map(place => [place.zone, new Intl.DateTimeFormat('en-GB', {timeZone:place.zone, hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false})]));
+function timeAt(now: Date | null, zone: typeof clockLocations[number]['zone']) {
   return now ? formats.get(zone)!.format(now) : '--:--:--';
 }
 function WorldClocks() {
@@ -28,7 +28,7 @@ function WorldClocks() {
   const [paused, setPaused] = useState(false);
   return <div className={`world-clock ${paused ? 'is-paused' : ''}`}>
     <div className="clock-track">{[0,1].map(copy => <div className="clock-run" key={copy} aria-hidden={copy === 1}>
-      {locations.map(place => <span key={place.id} className="city-clock"><span>{place.name}</span><time>{timeAt(now,place.zone)}</time></span>)}
+      {clockLocations.map(place => <span key={place.id} className="city-clock"><span>{place.name}</span><time>{timeAt(now,place.zone)}</time></span>)}
     </div>)}</div>
     <button className="clock-pause" aria-label={paused ? 'Resume moving clocks' : 'Pause moving clocks'} onClick={() => setPaused(!paused)}>{paused ? '▷' : 'Ⅱ'}</button>
   </div>;
