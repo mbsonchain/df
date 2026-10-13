@@ -11,7 +11,7 @@ Matteo approved publishing the current homepage to desertformal.com, with naviga
 - Gallery and Network use the same flower and navigation sizes as Home. Clicking the flower switches between them in preview.
 - Gallery navigation: gallery / single — flower — all / conamore. Active view is pink. Single shows five products: a large center item, smaller neighbors and two even smaller outer items. Clicking anywhere on either side moves exactly one product; the center opens its detail. Scroll, swipe and keyboard arrows also navigate. All is the compact, unlabeled collection grid of 20 studies. Multi has been removed. Conamore is a separate blank page with an About-style heading and layout; /collection and /amore redirect to /conamore. Legacy Multi and Capsule query links show All.
 - Network navigation: network / desert — flower — formal / explore. Desert retains the journal and its scroll-linked artifacts. Formal retains the rotating/rearranging project scene. Explore is a newspaper-like grid of six square panels linking to the three current stories and three projects. Legacy Live, Projects, Portfolio, Stuff, All and Everything query links still work.
-- Inner footers have regional brand left, location and HH:MM:SS centered, and only home at right. Everything is lowercase in the same ink color. Time-zone estimation selects the location naturally, without a prompt or manual selector. Kilauea uses Island Formal, Conamore/CDMX use Desert Formal, and the European locations use Spazio Libero.
+- Inner footers have regional brand left, location and HH:MM:SS centered, and only home at right. Everything is lowercase in the same ink color. Time-zone estimation selects the location naturally, without a prompt or manual selector. Kilauea uses Island Formal, Conamore/CDMX use Desert Formal, and the European locations use Freetown Formal.
 - About has three centered uppercase blocks: FORMAL, DESERT FORMAL, PURCHASING, with generous spacing and separate placeholder copy. Home and About are fixed to the viewport without vertical scrolling. About sizes its three complete sections, social links and copyright to the available space. Its header and flower remain compact. Beneath Purchasing are small Instagram (@desertformal), YouTube (@strikeout-studios) and Strikeout (strikeout.us) links, followed by the copyright. The Gallery subpage is now Conamore. The separate Conamore brand and clock location keep their name.
 - Cart uses small lowercase monospaced text and a compact header. Its empty state reads “your cart is empty.” and “how to purchase”. The entire highlighted phrase links to /about#purchasing. This is an anchor link only, not an email signup yet. Studies are not purchasable; real collection data and complete commerce verification remain for later.
 
@@ -35,3 +35,11 @@ Original Strikeout theme: local backup `backups/strikeout-2026-09-22/theme/` in 
 The Gallery, newspaper index, About and Cart revisions are preview-only. Keep the current public homepage release on main. Matteo reported fixing public-domain access before this design pass; independent browser verification is still blocked by the browser policy service.
 
 The navigation label is store across the private preview, including after opening it. The Store page heading and browser title use the same name. The existing /cart route, cart behavior and empty-cart wording stay unchanged.
+
+## Site roles confirmed October 13, 2026
+
+- desertformal.com is the Formal and Desert Formal site, including the label, personal work, gallery, journal/archive and products.
+- strikeout.us is the Strikeout studio site.
+- visitconamore.com is for Conamore as a project and mythology: a tourism-style site for Conamore and everything it contains, including the map, places, stories and artifacts.
+
+The European regional footer name is now Freetown Formal (London, Milano and Copenhagen).
