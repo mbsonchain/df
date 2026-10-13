@@ -1,6 +1,6 @@
-// Preview builds opt in to the full site. Other builds publish Home only.
+// The current site is public. A deliberate build setting can restore Home-only mode.
 // This is compiled into both the server and client, keeping hydration consistent.
-export const homeOnly = !import.meta.env.DEV && import.meta.env.VITE_FORMAL_PREVIEW !== 'true';
+export const homeOnly = !import.meta.env.DEV && import.meta.env.VITE_FORMAL_HOME_ONLY === 'true';
 
 export function launchResponse(request: Request): Response | undefined {
   if (!homeOnly) return;

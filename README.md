@@ -2,28 +2,29 @@
 
 Custom Shopify Hydrogen storefront, hosted on Shopify Oxygen at desertformal.com. Source and revision history are saved in GitHub: mbsonchain/df.
 
-## Homepage release
+## Public release — October 14, 2026
 
-The public release displays the approved FORMAL homepage, with its flower, six moving clocks and centered regional footer. Gallery, About, Network, Cart, FORMAL and the flower remain visible but inactive. Requests to unfinished pages and cart actions redirect to Home before loading Shopify data.
+The current site is publicly accessible at desertformal.com: Home, Gallery, About, Network, Conamore, product study pages and Store. Navigation, the wordmark and the flower are active. This release includes the supplied pink brush anarchy overlay, eight clocks ordered by current time, regional brand names, the latest About copy and the phone wordmark sizing from the mobile preview.
 
-Production builds are locked by default. The GitHub workflow sets `VITE_FORMAL_PREVIEW=true` for branches other than `main`, preserving the complete interactive site in preview. `main` deploys the locked public release. Local development is unlocked. This switch is a build setting, never a visitor query parameter. Change the launch policy deliberately when the full site is approved.
+The full site is enabled by default in production and preview builds. To intentionally restore the earlier homepage-only policy, build with `VITE_FORMAL_HOME_ONLY=true`; local development stays open. The flag is compiled into server and client consistently. Visitor query parameters cannot change access.
 
 ## Working on the site
 
 Use Node.js and `npm ci`. Link with `shopify hydrogen link`, then pull the appropriate environment with `shopify hydrogen env pull`. Keep `.env`, `.shopify/`, tokens and deployment logs private.
 
-- `npm run dev`: local development, with all working pages.
+- `npm run dev`: local development.
 - `npm run typecheck`: TypeScript and route checks.
-- `node scripts/check-launch.mjs`: production/preview access checks.
-- `npm run build`: locked production build.
-- `VITE_FORMAL_PREVIEW=true npm run build`: complete preview build.
+- `node scripts/check-launch.mjs`: public access and optional homepage-only checks.
+- `node scripts/check-cart.mjs`: cart lookup recovery checks.
+- `npm run build`: complete production build.
+- `VITE_FORMAL_HOME_ONLY=true npm run build`: optional homepage-only build.
 
-Push design updates to `desert-formal-skeleton`. GitHub Actions builds and deploys a new immutable Oxygen preview; the workflow summary links to that exact revision. An older preview URL will continue showing its older code. Pushes to `main` publish production, so keep ongoing design revisions on the preview branch.
+Design updates belong on preview branches. GitHub Actions deploys an immutable Oxygen preview for each push; previous preview URLs retain their earlier content. The main branch deploys to desertformal.com. Publish preview work to main only when requested.
+
+The independent desert-formal-mobile branch provides the phone frame used for design review. The public site serves the responsive desktop implementation at every screen size, including the phone sizing adopted from that branch; it does not use the preview frame.
 
 ## Content and saved progress
 
-Editable sample content lives under `app/content/`, separately from layout and styles. These are design studies, not purchasable products. About has three centered placeholder sections: FORMAL, DESERT FORMAL and CONAMORE. The flower source is in `app/content/site.ts` and can be replaced through Shopify Files.
+Content is kept in app/content/. About uses Matteo’s current FORMAL, DESERT FORMAL and HOW TO PURCHASE copy. The gallery contains design studies rather than purchasable products. Network applications, purchase requests and final collection commerce are future work.
 
-See [PROGRESS.md](PROGRESS.md) for the accepted direction and next stages. The original Strikeout theme has a separate local backup and saved Shopify duplicate; it is not replaced by this application.
-
-The homepage retains `noindex, nofollow` during this initial release. Mobile and final content remain unfinished by agreement.
+See PROGRESS.md for the accepted direction. Preserve the original Strikeout theme backups. The site retains its existing noindex, nofollow setting during this design stage.
