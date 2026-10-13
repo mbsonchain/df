@@ -1,14 +1,14 @@
-# Saved checkpoint — September 29, 2026
+# Saved checkpoint — October 14, 2026
 
 ## Release scope
 
-Matteo approved publishing the current homepage to desertformal.com, with navigation visible but inactive, including FORMAL and the flower. Only Home is accessible publicly. The full working site is preserved in the preview branch, with ongoing revision history in GitHub. This release does not approve final content, commerce or the mobile design.
+Matteo requested publishing the latest site and clarified that it should be accessible by going to desertformal.com. The October 14 release opens the current pages and navigation publicly, replacing the earlier homepage-only release. It includes the latest pink brush overlay, clocks, About copy and responsive phone sizing. Existing design studies and purchasing guidance are included; application and purchase-request functionality remain future work.
 
 ## Approved design and working interactions
 
 - White background; original Articulat FORMAL wordmark, Courier-style small typography and pink flower. Home has the stationary wordmark, compact navigation and centered lowercase regional brand, location and seconds clock.
 - White eight-city moving strip everywhere: Kilauea, Conamore (Los Angeles time), CDMX, London, Milano, Copenhagen, Amsterdam and Cape Town. It is inset from the top, keeps moving on hover and has an explicit pause control.
-- Gallery and Network use the same flower and navigation sizes as Home. Clicking the flower switches between them in preview.
+- Gallery and Network use the same flower and navigation sizes as Home. Clicking the flower switches between them.
 - Gallery navigation: gallery / single — flower — all / conamore. Active view is pink. Single shows five products: a large center item, smaller neighbors and two even smaller outer items. Clicking anywhere on either side moves exactly one product; the center opens its detail. Scroll, swipe and keyboard arrows also navigate. All is the compact, unlabeled collection grid of 20 studies. Multi has been removed. Conamore is a separate blank page with an About-style heading and layout; /collection and /amore redirect to /conamore. Legacy Multi and Capsule query links show All.
 - Network navigation: network / desert — flower — formal / explore. Desert retains the journal and its scroll-linked artifacts. Formal retains the rotating/rearranging project scene. Explore is a newspaper-like grid of six square panels linking to the three current stories and three projects. Legacy Live, Projects, Portfolio, Stuff, All and Everything query links still work.
 - Inner footers have regional brand left, location and HH:MM:SS centered, and only home at right. Everything is lowercase in the same ink color. Time-zone estimation selects the location naturally, without a prompt or manual selector. Kilauea uses Island Formal, Conamore/CDMX use Desert Formal, London and Copenhagen use Freetown Formal, and Milano uses Spazio Libero.
@@ -30,11 +30,11 @@ GitHub repository: mbsonchain/df. Working branch: desert-formal-skeleton. Public
 
 Original Strikeout theme: local backup `backups/strikeout-2026-09-22/theme/` in the websites workspace; Shopify duplicate theme 166894043367 preserves original theme 154397507815. Do not overwrite or delete these backups.
 
-## Latest preview revision
+## Current release
 
-The Gallery, newspaper index, About and Cart revisions are preview-only. Keep the current public homepage release on main. Matteo reported fixing public-domain access before this design pass; independent browser verification is still blocked by the browser policy service.
+The current Gallery, newspaper index, About and Store revisions are included in the authorized October 14 public release. Main is the public deployment branch; future design updates remain on previews until another release is requested.
 
-The navigation label is store across the private preview, including after opening it. The Store page heading and browser title use the same name. The existing /cart route, cart behavior and empty-cart wording stay unchanged.
+The navigation label is store across the site, including after opening it. The Store page heading and browser title use the same name. The existing /cart route, cart behavior and empty-cart wording stay unchanged.
 
 ## Site roles confirmed October 13, 2026
 
@@ -48,10 +48,14 @@ Amsterdam (Europe/Amsterdam) and Cape Town (Africa/Johannesburg) are included in
 
 The top clocks sort from earliest to latest UTC offset, recalculating each minute so daylight-saving changes stay in order. Equal-time cities retain their existing relative order.
 
-The homepage layers Matteo’s supplied circle-A-symbol.webp brush symbol over the original black A in FORMAL. The original source is preserved in public/formal-anarchy-brush-source.webp; an SVG color filter removes the white background and recolors the ink to flower-petal pink (#efaec0), retaining the exact shape, gaps and brush texture. The overlay scales with the letter on desktop and mobile. This replaces the earlier procedural spray-paint version and remains preview-only.
+The homepage layers Matteo’s supplied circle-A-symbol.webp brush symbol over the original black A in FORMAL. The original source is preserved in public/formal-anarchy-brush-source.webp; an SVG color filter removes the white background and recolors the ink to flower-petal pink (#efaec0), retaining the exact shape, gaps and brush texture. The overlay scales with the letter on desktop and mobile. This replaces the earlier procedural spray-paint version and is included in the public release.
 
 The brush recoloring filter boosts ink coverage to make the painted pink strokes opaque over the black wordmark, while leaving the reference’s open brush gaps transparent.
 
 ## About copy — October 14, 2026
 
-Replaced all three About placeholders with Matteo’s supplied copy: FORMAL’s purpose and values; desert FORMAL’s support for the label in broadcasting, distribution and art direction; and how network membership, purchase requests, at-cost access, sustainable production, limited batches and later out-of-network availability work. Corrected “a produce” to “a product” and capitalized sentence starts while retaining the brand styling. The purchase heading is HOW TO PURCHASE; its purchasing anchor remains compatible with Store. Sections size to their own copy within the existing fixed page. This is a preview content update; the application and purchase-request flows are not implemented by this change.
+Replaced all three About placeholders with Matteo’s supplied copy: FORMAL’s purpose and values; desert FORMAL’s support for the label in broadcasting, distribution and art direction; and how network membership, purchase requests, at-cost access, sustainable production, limited batches and later out-of-network availability work. Corrected “a produce” to “a product” and capitalized sentence starts while retaining the brand styling. The purchase heading is HOW TO PURCHASE; its purchasing anchor remains compatible with Store. Sections size to their own copy within the existing fixed page. This copy is included in the public release; the application and purchase-request flows are not implemented by this change.
+
+## Live access — October 14, 2026
+
+Default production builds now serve the full current site. VITE_FORMAL_HOME_ONLY=true can deliberately restore homepage-only mode. The public responsive stylesheet includes the mobile preview’s 18vw phone wordmark sizing. The desert FORMAL copy begins “desert FORMAL is a network supporting the FORMAL label” and includes live broadcasting and distribution, art direction, sustainable development, and formalization independently of medium and time.
