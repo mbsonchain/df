@@ -1,20 +1,20 @@
-// Placeholder copy is kept separate from the About page layout.
+// About copy supplied by Matteo, October 14, 2026.
 export const aboutSections = [
   {
-    id: 'formal',
-    title: 'FORMAL',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non metus auctor fringilla. Aenean lacinia bibendum nulla sed consectetur. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper.',
+    "id": "formal",
+    "title": "FORMAL",
+    "body": "FORMAL is a label in the pursuit of formalizing ordinary things. To formalize is to give life and story. To formalize the ordinary is to convey the beauty in all things. FORMAL believes strongly in beauty, hope, the collective, and a sustainable future filled with flowers and love. FORMAL holds a mirror to the world through art to formalize the best and worst of what makes us beautiful."
   },
   {
-    id: 'desert-formal',
-    title: 'DESERT FORMAL',
-    body: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur blandit tempus porttitor. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+    "id": "desert-formal",
+    "title": "DESERT FORMAL",
+    "body": "desert FORMAL is a first of its kind network that supports the FORMAL label in broadcasting, distribution, and art direction. desert FORMAL exists to design and serve art for its collective as offerings that exist independently of medium."
   },
   {
-    id: 'purchasing',
-    title: 'PURCHASING',
-    body: 'Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
-  },
+    "id": "purchasing",
+    "title": "HOW TO PURCHASE",
+    "body": "To purchase FORMAL products, you must first apply to join the desert FORMAL network. If you are in-network, you may request to purchase a product, and if accepted, you will receive it at cost. All products are made 100% sustainably, either in-house, or in collaboration with local artisans and production houses. FORMAL products are made in limited batches and served only to our collective to limit waste. If you are out of network, you may still be able to request certain products at a higher price and later date, subject to availability."
+  }
 ] as const;
 
 export const aboutSocialLinks = [
