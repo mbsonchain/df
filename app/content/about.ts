@@ -8,7 +8,7 @@ export const aboutSections = [
   {
     "id": "desert-formal",
     "title": "desert FORMAL",
-    "body": "desert FORMAL is a network supporting the FORMAL label through live broadcasting and distribution, art direction, and sustainable development. desert FORMAL exists to design and serve art for the collective as offerings of formalization that exist independently of medium and time."
+    "body": "desert FORMAL is a network supporting the FORMAL label through live broadcasting and distribution, art direction, and sustainable development. desert FORMAL exists to design and serve art for the collective as offerings of formalization that exist independently of time and medium."
   },
   {
     "id": "purchasing",
