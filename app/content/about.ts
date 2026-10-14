@@ -3,7 +3,7 @@ export const aboutSections = [
   {
     "id": "formal",
     "title": "FORMAL",
-    "body": "FORMAL is a label in the pursuit of formalizing ordinary things. to formalize is to give life and story. to formalize the ordinary is to convey the beauty in all things. FORMAL believes strongly in beauty, hope, the collective, and a sustainable future filled with flowers and love. FORMAL holds a mirror to the world through art to formalize the best and worst of what makes us beautiful."
+    "body": "FORMAL is a label in pursuit of formalizing ordinary things. to formalize is to give life and story. to formalize the ordinary is to convey the beauty in all things. FORMAL believes strongly in beauty, hope, the collective, and a sustainable future filled with flowers and love. FORMAL holds a mirror to the world through art to formalize the best and worst of what makes us beautiful."
   },
   {
     "id": "desert-formal",
