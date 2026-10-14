@@ -13,7 +13,7 @@ export const aboutSections = [
   {
     "id": "purchasing",
     "title": "how to purchase",
-    "body": "to purchase FORMAL products, you must first apply to join the desert FORMAL network. if you are in-network, you may request to purchase a product, and if accepted, you will receive it at cost. all products are made 100% sustainably, either in-house, or in collaboration with local artisans and production houses. FORMAL products are made in limited batches and served only to our collective to limit waste. if you are out of network, you may still be able to request certain products at a higher price and later date, subject to availability."
+    "body": "to purchase a FORMAL product, you must first apply to join the desert FORMAL network. if you are in-network, you may request to purchase a product, and if accepted, you will receive it at cost. all products are made 100% sustainably, either in-house, or in collaboration with local artisans and production houses. FORMAL products are made in limited batches and served only to our collective to limit waste. if you are out of network, you may still be able to request certain products at a higher retail price and later date, subject to availability."
   }
 ] as const;
 
