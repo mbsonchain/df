@@ -5,6 +5,7 @@ import {galleryViews, networkViews, galleryViewLinks, networkViewLinks, viewInde
 import {homeOnly} from '~/lib/launch';
 import {FormalText} from './FormalText';
 import {ViewToggle} from './ViewToggle';
+import {DesertBackdrop} from './DesertBackdrop';
 
 function EntryLink({to, children}: {to:string; children:React.ReactNode}) {
   const {pathname} = useLocation();
@@ -89,6 +90,7 @@ export function Shell({children}: {children:React.ReactNode}) {
     <img src={section === 'network' && activeView === 0 ? identity.flowerTransparent : identity.flower} alt="FORMAL flower" width="110" height="118"/>
   </>;
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${fixedPage ? 'is-fixed-page' : ''} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
+    {section === 'network' && activeView === 0 && <DesertBackdrop />}
     <a href="#main" className="skip-link">Skip to content</a>
     <WorldClocks />
     <header className="site-header compact-header">

@@ -158,11 +158,17 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .site-shell:has(.desert-camo) .site-header nav a.active{color:var(--pink)}
 .network-page.desert-camo{height:100%;min-height:0;padding:0}
 @media(max-width:760px){html:has(.desert-camo){--desert-camo-image:url('https://cdn.shopify.com/s/files/1/0690/9103/3319/files/desert-camo-portrait.png?v=1792027813&width=1000');--desert-camo-fit-height:calc(100vw * 3300 / 2539)}}
-/* One continuous image for the page and browser bars, scaled to the screen, not the padded body.
-   Repeat only into the off-screen bleed; the centered image covers the complete large viewport. */
+/* Paint actual image pixels beneath Safari's bars. Reflected edges meet the center
+   at identical pixels, avoiding both repeated-image seams and a zoomed body background. */
+.desert-backdrop{display:none}
 @media(max-width:760px),(hover:none) and (pointer:coarse){
-  body:has(.desert-camo){position:relative;height:auto;padding-block:50vh;padding-block:50lvh;background:#cbb98f var(--desert-camo-image) center/auto max(100vh,var(--desert-camo-fit-height)) repeat-y;background-size:auto max(100lvh,var(--desert-camo-fit-height));touch-action:pinch-zoom}
-  .site-shell:has(.desert-camo){background:transparent;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+  body:has(.desert-camo){position:relative;height:auto;padding-block:50vh;padding-block:50lvh;background:#cbb98f;touch-action:pinch-zoom}
+  .site-shell:has(.desert-camo){position:relative;isolation:isolate;overflow:visible;background:transparent;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+  .desert-backdrop{display:block;position:absolute;z-index:-1;pointer-events:none;left:0;right:0;top:50%;height:max(100vh,var(--desert-camo-fit-height));height:max(100lvh,var(--desert-camo-fit-height));transform:translateY(-50%)}
+  .desert-backdrop picture{display:block;position:absolute;inset:0;overflow:hidden}
+  .desert-backdrop img{width:100%;height:100%;max-width:none;object-fit:cover;transform:scale(1.004)}
+  .desert-backdrop-top{transform:translateY(-100%) scaleY(-1)}
+  .desert-backdrop-bottom{transform:translateY(100%) scaleY(-1)}
 }
 
 /* On phones, view all is a fixed four-by-five collection within the screen. */
