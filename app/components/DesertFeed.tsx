@@ -39,9 +39,9 @@ export function DesertFeed() {
     scrollToOffering(feed.current, index, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth');
   }
 
-  return <div className="desert-feed" ref={feed} role="region" aria-label="desert offerings">
+  return <div className="desert-feed" ref={feed} role="region" aria-label="FORMAL offerings">
     {desertOfferings.map((item, index) => <article className="desert-entry" id={`offering-${item.id}`} key={item.id} aria-labelledby={`desert-${item.id}`}>
-      <Link className="desert-content desert-card-link" to={`/network/desert/${item.id}`} aria-labelledby={`desert-${item.id}`} onClick={() => rememberOffering(item.id)}>
+      <Link className="desert-content desert-card-link" to={`/network/formal/${item.id}`} aria-labelledby={`desert-${item.id}`} onClick={() => rememberOffering(item.id)}>
         <div className="desert-meta"><span>{item.location}</span><span>{item.detail}</span></div>
         <DesertMedia kind={item.kind}/>
         <h2 id={`desert-${item.id}`}>{item.title}</h2>

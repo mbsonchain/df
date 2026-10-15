@@ -86,7 +86,7 @@ export function Shell({children}: {children:React.ReactNode}) {
   const network = pathname.startsWith('/network') || pathname === '/website';
   const gallery = section === 'gallery' || pathname.startsWith('/products');
   const flower = <>
-    <img src={identity.flower} alt="FORMAL flower" width="110" height="118"/>
+    <img src={section === 'network' && activeView === 0 ? identity.flowerTransparent : identity.flower} alt="FORMAL flower" width="110" height="118"/>
   </>;
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${fixedPage ? 'is-fixed-page' : ''} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     <a href="#main" className="skip-link">Skip to content</a>
