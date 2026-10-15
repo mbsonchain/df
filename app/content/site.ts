@@ -2,6 +2,7 @@
 // to change the flower without changing any page layouts.
 export const identity = {
   flower: 'https://cdn.shopify.com/s/files/1/0690/9103/3319/files/formal-flower.png?width=320',
+  flowerTransparent: 'https://cdn.shopify.com/s/files/1/0690/9103/3319/files/formal-flower-transparent.png?v=1792027869&width=320',
 };
 export const locations = [
   {id:'kilauea', name:'Kilauea', zone:'Pacific/Honolulu', brand:'Island Formal', latitude:22.211, longitude:-159.412},
