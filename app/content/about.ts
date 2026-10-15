@@ -1,4 +1,4 @@
-// About copy supplied by Matteo, October 14, 2026.
+// About copy supplied by Matteo, October 15, 2026.
 export const aboutSections = [
   {
     "id": "formal",
@@ -8,7 +8,7 @@ export const aboutSections = [
   {
     "id": "desert-formal",
     "title": "desert FORMAL",
-    "body": "desert FORMAL is a network supporting the FORMAL label through live broadcasting and distribution, art direction, and sustainable development. desert FORMAL exists to design and serve art for the collective as offerings of formalization that exist independently of time and medium."
+    "body": "desert FORMAL is a network supporting the FORMAL label through live broadcasting, distribution, art direction, sustainable development, and design. desert FORMAL exists to create and serve art to, by, and for the collective as offerings of formalization that exist independently of time and medium."
   },
   {
     "id": "purchasing",

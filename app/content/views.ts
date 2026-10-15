@@ -9,7 +9,9 @@ export const networkViewLinks = ['/network?view=desert', '/network?view=formal']
 export function viewIndex(section: 'gallery' | 'network', value: string | null) {
   const aliases: Record<string, string> = section === 'gallery'
     ? {one: 'single', conveyor: 'single', scattered: 'all', multi: 'all', capsule: 'all'}
-    : {journal: 'desert', live: 'desert', projects: 'formal', portfolio: 'formal', stuff: 'formal', explore: 'desert', all: 'desert', everything: 'desert'};
+    : {journal: 'formal', live: 'desert', projects: 'formal', portfolio: 'formal', stuff: 'formal', explore: 'desert', all: 'desert', everything: 'desert'};
   const keys: readonly string[] = section === 'gallery' ? galleryViewKeys : networkViewKeys;
-  return Math.max(0, keys.indexOf(aliases[value ?? ''] ?? value ?? keys[0]));
+  const defaultIndex = section === 'network' ? 1 : 0;
+  const index = keys.indexOf(aliases[value ?? ''] ?? value ?? keys[defaultIndex]);
+  return index < 0 ? defaultIndex : index;
 }

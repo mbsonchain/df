@@ -100,7 +100,7 @@ html:has(.desert-feed),body:has(.desert-feed){overflow:hidden;overscroll-behavio
 .site-shell:has(.desert-feed)>.world-clock,.site-shell:has(.desert-feed)>.site-header,.site-shell:has(.desert-feed)>.site-footer{flex-shrink:0}
 .site-shell:has(.desert-feed)>main{flex:1;min-height:0;overflow:clip;container-type:size}
 .site-shell:has(.desert-feed)>.site-footer{position:static}
-.network-view-0:has(.desert-feed){height:100%;min-height:0;padding:0}
+.network-page:has(.desert-feed){height:100%;min-height:0;padding:0}
 .desert-feed{width:100%;height:100%;max-width:1120px;margin:auto;padding:16px 42px 22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:22px 42px;container-type:size}
 .desert-entry{display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;position:relative}
 .desert-content{width:min(100%,240px,40cqh)}
@@ -143,6 +143,20 @@ html:has(.desert-feed),body:has(.desert-feed){overflow:hidden;overscroll-behavio
 }
 @media(max-width:760px) and (max-height:540px){.desert-content{width:min(100%,480px,80cqh)}.desert-entry{padding:8px 24px 48px}.desert-content h2{margin:10px 0 4px}.desert-content p{line-height:1.4}}
 @media(prefers-reduced-motion:reduce){.desert-feed{scroll-behavior:auto}}
+
+/* Supplied landscape and portrait camouflage fills the complete desert page. */
+html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavior:none}
+.site-shell:has(.desert-camo){height:100svh;display:flex;flex-direction:column;overflow:clip;background:#cbb98f url('https://cdn.shopify.com/s/files/1/0690/9103/3319/files/desert-camo-landscape.png?v=1792027789&width=2400') center/cover no-repeat}
+.site-shell:has(.desert-camo)>.world-clock,.site-shell:has(.desert-camo)>.site-header,.site-shell:has(.desert-camo)>.site-footer{flex-shrink:0;background:transparent}
+.site-shell:has(.desert-camo)>main{flex:1;min-height:0;overflow:clip}
+.site-shell:has(.desert-camo)>.site-footer{position:static}
+.site-shell:has(.desert-camo) .clock-pause{background:#e9dfbd}
+.site-shell:has(.desert-camo) .view-toggle-track{border-color:var(--ink)}
+.site-shell:has(.desert-camo){color:var(--ink)}
+.site-shell:has(.desert-camo) a{color:var(--ink)}
+.site-shell:has(.desert-camo) .site-header nav a.active{color:var(--pink)}
+.network-page.desert-camo{height:100%;min-height:0;padding:0}
+@media(max-width:760px){.site-shell:has(.desert-camo){background-image:url('https://cdn.shopify.com/s/files/1/0690/9103/3319/files/desert-camo-portrait.png?v=1792027813&width=1000')}}
 
 /* On phones, view all is a fixed four-by-five collection within the screen. */
 @media(max-width:760px){
