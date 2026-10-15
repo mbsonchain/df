@@ -152,8 +152,9 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .site-shell:has(.desert-camo)>.site-footer{position:static}
 .site-shell:has(.desert-camo) .clock-pause{background:#e9dfbd}
 .site-shell:has(.desert-camo) .view-toggle-track{border-color:var(--ink)}
-.site-shell:has(.desert-camo){--ink:var(--pink);color:var(--pink)}
+.site-shell:has(.desert-camo){--pink:#c42683;--ink:var(--pink);color:var(--pink)}
 .site-shell:has(.desert-camo) a{color:var(--pink)}
+.site-shell:has(.desert-camo) :is(.world-clock,.site-header nav a,.site-footer,.view-toggle a){font-weight:700;text-shadow:0 0 2px #f7edcf,0 1px 3px #f7edcf80}
 .site-shell:has(.desert-camo) .site-header nav a.active{color:#151515}
 .network-page.desert-camo{height:100%;min-height:0;padding:0}
 @media(max-width:760px){.site-shell:has(.desert-camo){background-image:url('https://cdn.shopify.com/s/files/1/0690/9103/3319/files/desert-camo-portrait.png?v=1792027813&width=1000')}}
