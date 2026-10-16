@@ -6,6 +6,7 @@ import {homeOnly} from '~/lib/launch';
 import {FormalText} from './FormalText';
 import {ViewToggle} from './ViewToggle';
 import {DesertBackdrop} from './DesertBackdrop';
+import {EditionSwitcher, editions, useEdition, type EditionId} from './EditionSwitcher';
 
 function EntryLink({to, children}: {to:string; children:React.ReactNode}) {
   const {pathname} = useLocation();
@@ -41,7 +42,7 @@ function WorldClocks() {
     <button className="clock-pause" aria-label={paused ? 'Resume moving clocks' : 'Pause moving clocks'} onClick={() => setPaused(!paused)}>{paused ? '▷' : 'Ⅱ'}</button>
   </div>;
 }
-function LocalClock() {
+function LocalClock({edition}: {edition: EditionId}) {
   const now = useClock();
   const [placeId, setPlaceId] = useState<string>('milano');
   useEffect(() => {
@@ -63,12 +64,13 @@ function LocalClock() {
     setPlaceId(ranked[0].id);
   }, []);
   const place = locations.find(item => item.id === placeId) ?? locations[4];
-  return <div className="local-clock"><span className="local-brand"><FormalText>{place.brand}</FormalText></span><div>
+  return <div className="local-clock"><span className="local-brand"><FormalText>{editions.find(item => item.id === edition)!.name}</FormalText></span><div>
     <span className="location-name">{place.name}</span>
     <time>{timeAt(now,place.zone)}</time>
   </div></div>;
 }
 export function Shell({children}: {children:React.ReactNode}) {
+  const {edition, selectEdition} = useEdition();
   const {pathname} = useLocation();
   const [params] = useSearchParams();
   const section = pathname === '/gallery' ? 'gallery' : pathname === '/network' ? 'network' : null;
@@ -94,6 +96,6 @@ export function Shell({children}: {children:React.ReactNode}) {
       <nav className="nav-right" aria-label="Network and store"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">store</EntryLink></nav>
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock/>{pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
+    <footer className="site-footer"><LocalClock edition={edition}/>{home && <EditionSwitcher edition={edition} onSelect={selectEdition}/>} {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
   </div>;
 }
