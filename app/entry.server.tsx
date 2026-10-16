@@ -16,12 +16,14 @@ export default async function handleRequest(
   context: HydrogenRouterContextProvider,
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    scriptSrc: ["'self'", 'https://cdn.shopify.com', 'https://static.klaviyo.com', 'https://static-tracking.klaviyo.com'],
+    connectSrc: ['https://a.klaviyo.com', 'https://fast.a.klaviyo.com', 'https://static-forms.klaviyo.com'],
     mediaSrc: ["'self'", 'https://media.strikeout.us', 'https://cdn.shopify.com'],
-    imgSrc: ["'self'", 'data:', 'https://cdn.shopify.com', 'https://shopify.com', 'https://media.strikeout.us', 'https://www.strikeout.us'],
+    imgSrc: ["'self'", 'data:', 'https://cdn.shopify.com', 'https://shopify.com', 'https://media.strikeout.us', 'https://www.strikeout.us', 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/'],
     frameAncestors: isCatalogEmbedPath(new URL(request.url).pathname)
       ? ["'self'", 'https://strikeout.us', 'https://www.strikeout.us', ...(import.meta.env.DEV ? ['http://127.0.0.1:4173', 'http://localhost:4173'] : [])]
       : ["'none'"],
-    styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net'],
+    styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net', 'https://static.klaviyo.com'],
     fontSrc: ["'self'", 'https://use.typekit.net', 'https://cdn.shopify.com'],
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,

@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import {identity} from '~/content/site';
 import {mediaLibrary} from '~/content/media';
 import {FormalVideo} from './FormalVideo';
+import {NetworkSignup} from './NetworkSignup';
 
 const folders = [
   {id: 'amore-point', title: 'amore point', description: 'pictures and fragments from amore point.'},
@@ -17,6 +18,7 @@ const introKey = 'formal:desert-intro:v2';
 export function DesertArchive() {
   const [entered, setEntered] = useState(false);
   const [selected, setSelected] = useState<ArchiveItem | null>(null);
+  const [signupOpened, setSignupOpened] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const archive = useRef<HTMLElement>(null);
   const intro = mediaLibrary.carlosVideo;
@@ -41,6 +43,7 @@ export function DesertArchive() {
 
   function openJoin(event: React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
+    setSignupOpened(true);
     setSelected(joinItem);
   }
 
@@ -67,11 +70,12 @@ export function DesertArchive() {
         </a>
       </div>
     </section>}
-    <dialog className="archive-window" ref={dialog} onClose={() => setSelected(null)} aria-labelledby="archive-window-title">
+    <dialog className={`archive-window${selected?.id === 'join' ? ' is-signup' : ''}`} ref={dialog} onClose={() => setSelected(null)} aria-labelledby="archive-window-title">
       {selected ? <>
         <header><h2 id="archive-window-title">{selected.title}</h2><button type="button" onClick={() => setSelected(null)} aria-label="Close archive item">×</button></header>
-        <div className="archive-window-content"><p>{selected.description}</p>{selected.id === 'join' ? <p className="archive-window-pending">sign-ups opening soon.</p> : <><div className="archive-empty-sheets" aria-hidden="true"><span/><span/><span/></div><p className="archive-window-pending">collection to be added</p></>}</div>
+        {selected.id !== 'join' && <div className="archive-window-content"><p>{selected.description}</p><div className="archive-empty-sheets" aria-hidden="true"><span/><span/><span/></div><p className="archive-window-pending">collection to be added</p></div>}
       </> : null}
+      <div hidden={selected?.id !== 'join'}>{signupOpened && <NetworkSignup/>}</div>
     </dialog>
   </div>;
 }
