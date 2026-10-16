@@ -7,6 +7,7 @@ import {
 } from '@shopify/hydrogen';
 import type {EntryContext} from 'react-router';
 import {isCatalogEmbedPath} from '~/lib/catalog-embed';
+import {isPublicSite} from '~/lib/crawling';
 
 export default async function handleRequest(
   request: Request,
@@ -55,6 +56,11 @@ export default async function handleRequest(
 
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
+  responseHeaders.set('X-Robots-Tag',
+    isPublicSite(request) && responseStatusCode < 400 && !isCatalogEmbedPath(new URL(request.url).pathname)
+      ? 'index, follow'
+      : 'noindex, nofollow',
+  );
 
   return new Response(body, {
     headers: responseHeaders,
