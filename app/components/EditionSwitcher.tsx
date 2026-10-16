@@ -4,9 +4,9 @@ import {FormalText} from './FormalText';
 
 export const editions = [
   {id: 'spazio-libero', name: 'spazio libero', territory: 'italia'},
-  {id: 'freetown', name: 'freetown FORMAL', territory: 'rest of europe / africa / islands'},
+  {id: 'freetown', name: 'freetown FORMAL', territory: 'rest of europe / africa / atlantic'},
   {id: 'island', name: 'island FORMAL', territory: 'hawaii'},
-  {id: 'desert', name: 'desert FORMAL', territory: 'rest of americas / asia'},
+  {id: 'desert', name: 'desert FORMAL', territory: 'rest of americas / asia / pacific'},
 ] as const;
 export type EditionId = (typeof editions)[number]['id'];
 const editionKey = 'formal:edition:v1';
@@ -15,7 +15,7 @@ const isEdition = (value: unknown): value is EditionId => editions.some(edition 
 export function editionForZone(zone: string): EditionId {
   if (['Europe/Rome', 'Europe/Vatican', 'Europe/San_Marino'].includes(zone)) return 'spazio-libero';
   if (zone === 'Pacific/Honolulu' || zone === 'US/Hawaii') return 'island';
-  if (zone.startsWith('America/') || zone.startsWith('Asia/')) return 'desert';
+  if (['America/', 'Asia/', 'Pacific/', 'Australia/'].some(region => zone.startsWith(region))) return 'desert';
   return 'freetown';
 }
 const localEdition = () => editionForZone(Intl.DateTimeFormat().resolvedOptions().timeZone);

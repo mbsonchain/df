@@ -17,7 +17,7 @@ export default async function handleRequest(
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     scriptSrc: ["'self'", 'https://cdn.shopify.com', 'https://static.klaviyo.com', 'https://static-tracking.klaviyo.com'],
-    connectSrc: ['https://a.klaviyo.com', 'https://fast.a.klaviyo.com'],
+    connectSrc: ['https://a.klaviyo.com', 'https://fast.a.klaviyo.com', 'https://static-forms.klaviyo.com'],
     mediaSrc: ["'self'", 'https://media.strikeout.us', 'https://cdn.shopify.com'],
     imgSrc: ["'self'", 'data:', 'https://cdn.shopify.com', 'https://shopify.com', 'https://media.strikeout.us', 'https://www.strikeout.us'],
     frameAncestors: isCatalogEmbedPath(new URL(request.url).pathname)
