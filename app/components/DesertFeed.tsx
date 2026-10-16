@@ -18,7 +18,7 @@ function rememberOffering(id: string) {
   try { window.sessionStorage.setItem(returnKey, id); } catch { /* Navigation still works without storage. */ }
 }
 
-function OfferingCard({item}: {item: Offering}) {
+function OfferingCard({item, openInNewTab}: {item: Offering; openInNewTab: boolean}) {
   const content = <>
     <div className="desert-meta"><span>{item.location}</span><span>{item.detail}</span></div>
     <DesertMedia item={item}/>
@@ -27,10 +27,10 @@ function OfferingCard({item}: {item: Offering}) {
   </>;
   return item.href?.startsWith('https://')
     ? <a className="desert-content desert-card-link" href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.title} — opens in a new tab`}>{content}</a>
-    : <Link className="desert-content desert-card-link" to={item.href || `/network/formal/${item.id}`} aria-labelledby={`desert-${item.id}`} onClick={() => rememberOffering(item.id)}>{content}</Link>;
+    : <Link className="desert-content desert-card-link" to={item.href || `/network/formal/${item.id}`} target={openInNewTab ? '_blank' : undefined} rel={openInNewTab ? 'noopener noreferrer' : undefined} aria-labelledby={`desert-${item.id}`} onClick={() => rememberOffering(item.id)}>{content}</Link>;
 }
 
-export function DesertFeed() {
+export function DesertFeed({openInNewTab = false}: {openInNewTab?: boolean}) {
   const feed = useRef<HTMLDivElement>(null);
   const {hash} = useLocation();
   const navigationType = useNavigationType();
@@ -53,7 +53,7 @@ export function DesertFeed() {
 
   return <div className="desert-feed" ref={feed} role="region" aria-label="FORMAL offerings">
     {desertOfferings.map((item, index) => <article className="desert-entry" id={`offering-${item.id}`} key={item.id} aria-labelledby={`desert-${item.id}`}>
-      <OfferingCard item={item}/>
+      <OfferingCard item={item} openInNewTab={openInNewTab}/>
       <div className="desert-steps">
         <button type="button" aria-label="Previous offering" disabled={index === 0} onClick={() => goTo(index - 1)}>↑</button>
         <button type="button" aria-label="Next offering" disabled={index === desertOfferings.length - 1} onClick={() => goTo(index + 1)}>↓</button>

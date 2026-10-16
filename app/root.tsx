@@ -3,6 +3,7 @@ import {Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation} from 'reac
 import {Shell} from '~/components/Shell';
 import {viewIndex} from '~/content/views';
 import skeletonStyles from '~/styles/skeleton.css?url';
+import {isCatalogEmbedPath} from '~/lib/catalog-embed';
 
 export function links() {return [{rel: 'stylesheet', href: 'https://use.typekit.net/sji2png.css'}, {rel: 'stylesheet', href: skeletonStyles}];}
 
@@ -29,6 +30,8 @@ export function Layout({children}: {children?: React.ReactNode}) {
 }
 
 export default function App() {
+  const {pathname} = useLocation();
+  if (isCatalogEmbedPath(pathname)) return <Outlet />;
   return <Shell><Outlet /></Shell>;
 }
 

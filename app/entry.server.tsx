@@ -6,6 +6,7 @@ import {
   type HydrogenRouterContextProvider,
 } from '@shopify/hydrogen';
 import type {EntryContext} from 'react-router';
+import {isCatalogEmbedPath} from '~/lib/catalog-embed';
 
 export default async function handleRequest(
   request: Request,
@@ -17,6 +18,9 @@ export default async function handleRequest(
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     mediaSrc: ["'self'", 'https://media.strikeout.us', 'https://cdn.shopify.com'],
     imgSrc: ["'self'", 'data:', 'https://cdn.shopify.com', 'https://shopify.com', 'https://media.strikeout.us', 'https://www.strikeout.us'],
+    frameAncestors: isCatalogEmbedPath(new URL(request.url).pathname)
+      ? ["'self'", 'https://strikeout.us', 'https://www.strikeout.us', ...(import.meta.env.DEV ? ['http://127.0.0.1:4173', 'http://localhost:4173'] : [])]
+      : ["'none'"],
     styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net'],
     fontSrc: ["'self'", 'https://use.typekit.net', 'https://cdn.shopify.com'],
     shop: {

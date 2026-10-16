@@ -28,3 +28,9 @@ The independent desert-formal-mobile branch provides the phone frame used for de
 Content is kept in app/content/. About uses Matteo’s current FORMAL, DESERT FORMAL and HOW TO PURCHASE copy. The gallery contains design studies rather than purchasable products. Network applications, purchase requests and final collection commerce are future work.
 
 See PROGRESS.md for the accepted direction. Preserve the original Strikeout theme backups. The site retains its existing noindex, nofollow setting during this design stage.
+
+## Strikeout live catalog embed
+
+`/embed/network` renders the same `DesertFeed`, `DesertArchive` and `app/content/desert.ts` offerings as `/network`, without the site navigation or clocks. Its Desert/FORMAL switch stays inside the embed; offering detail links open the canonical full pages in new tabs. Content changes published to this site appear on the next load or refresh of Strikeout's desktop catalog, without a second content copy or Strikeout deployment.
+
+Only this exact route permits framing by `https://strikeout.us` and `https://www.strikeout.us` (plus the local Strikeout preview origins during development). Other routes retain `frame-ancestors 'none'`. Its scoped stylesheet does not change the normal network page. Strikeout shows a desktop-only notice on mobile instead of loading this view.

@@ -1,0 +1,17 @@
+/* A live view of the same feed and content used by /network, sized for Strikeout's inset. */
+html:has(.catalog-embed), body:has(.catalog-embed) { height: 100%; overflow: hidden; }
+.catalog-embed, .catalog-embed:has(.desert-feed) { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.catalog-embed > main { flex: 1; min-height: 0; overflow: hidden; container-type: size; }
+.catalog-embed .network-page { height: 100%; min-height: 0; padding: 0; }
+.catalog-embed > .site-footer { position: static; display: flex; justify-content: center; flex-shrink: 0; min-height: 52px; padding: 0 16px; background: transparent; }
+.catalog-embed-desert { background: #cbb98f url('https://cdn.shopify.com/s/files/1/0690/9103/3319/files/desert-camo-landscape.png?v=1792027789&width=1600') center/cover no-repeat; }
+.catalog-embed .desert-feed { display: grid; height: 100%; padding: 16px 42px 22px; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: minmax(220px, 1fr); gap: 22px 42px; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: none; }
+.catalog-embed .desert-entry { height: auto; min-height: 0; padding: 0; }
+.catalog-embed .desert-content { width: min(100%, 240px); }
+.catalog-embed .desert-content h2 { margin: 12px 0 5px; font-size: 11px; line-height: 1.4; }
+.catalog-embed .desert-content p { line-height: 1.4; }
+.catalog-embed .desert-meta { margin-bottom: 8px; }
+.catalog-embed .desert-steps { display: none; }
+@media (max-width: 600px) {
+  .catalog-embed .desert-feed { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 20px; gap: 22px 20px; }
+}
