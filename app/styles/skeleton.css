@@ -310,3 +310,9 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .sms-policy-page a{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px}
 .sms-policy-page nav{display:flex;gap:24px;flex-wrap:wrap;margin-top:40px}
 @media(max-width:700px){.sms-policy-page{padding:16px 20px 110px;font-size:14px}.sms-policy-page h1{font-size:22px}}
+.archive-window.is-signup{background:#fff;width:min(560px,calc(100vw - 32px))}
+.network-signup{padding:8px 14px 18px;min-height:240px;font:14px/1.5 var(--mono)}
+.network-signup>p{padding:20px 12px}
+.network-signup-policies{display:flex;justify-content:center;gap:20px;font-size:11px}
+.network-signup-policies a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.network-signup{padding:4px 4px 16px}}
