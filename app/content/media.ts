@@ -12,6 +12,6 @@ export const mediaLibrary: {
   collectiveNote?: string[];
   amorePointImages: {src: string; alt: string}[];
 } = {
-  carlosVideo: {src: `${formalMediaBase}carlos1016.mp4`},
+  carlosVideo: {src: `${formalMediaBase}carlosattempt2.mp4`},
   amorePointImages: [],
 };

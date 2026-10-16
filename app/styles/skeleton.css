@@ -212,6 +212,9 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .collage-piece-2::before{background:#b8c3bb}
 .collage-caption{position:absolute;bottom:7%;right:9%;z-index:2;color:#252b20;font:italic 11px Georgia,serif;transform:rotate(-5deg)}
 .formal-video-wrap{width:100%}
+.city-clock.is-regional{color:var(--pink)}
+.formal-video-surface{display:block;width:100%;line-height:0;border-radius:0}
+.formal-video-minimal video::-webkit-media-controls{display:none!important}
 .formal-video{display:block;width:100%;aspect-ratio:16/9;background:#171717;object-fit:contain}
 .formal-video-error{font:11px/1.7 var(--mono);padding:12px 0}
 .formal-video-error button{text-decoration:underline;min-height:44px}

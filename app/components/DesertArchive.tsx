@@ -50,7 +50,7 @@ export function DesertArchive() {
       <img className="desert-bloom bloom-two" src={identity.flowerTransparent} alt="" width="110" height="118"/>
       <div className="desert-intro-content">
         <p className="desert-intro-eyebrow">find your desert</p>
-        {intro ? <FormalVideo video={intro} title="Carlos — introducing desert FORMAL" requireComplete onEnded={enterArchive}/> : <p role="status">the film is temporarily unavailable.</p>}
+        {intro ? <FormalVideo video={intro} title="Carlos — introducing desert FORMAL" minimal suspended={Boolean(selected)} requireComplete onEnded={enterArchive}/> : <p role="status">the film is temporarily unavailable.</p>}
         <h1>introducing desert FORMAL</h1>
         <a className="desert-join-link" href="#join" aria-haspopup="dialog" onClick={openJoin}>join</a>
       </div>

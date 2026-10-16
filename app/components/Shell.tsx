@@ -6,7 +6,7 @@ import {homeOnly} from '~/lib/launch';
 import {FormalText} from './FormalText';
 import {ViewToggle} from './ViewToggle';
 import {DesertBackdrop} from './DesertBackdrop';
-import {EditionSwitcher, editions, useEdition, type EditionId} from './EditionSwitcher';
+import {EditionSwitcher, editions, editionForZone, useEdition, type EditionId} from './EditionSwitcher';
 
 function EntryLink({to, children}: {to:string; children:React.ReactNode}) {
   const {pathname} = useLocation();
@@ -28,7 +28,7 @@ const formats = new Map<string, Intl.DateTimeFormat>(clockLocations.map(place =>
 function timeAt(now: Date | null, zone: typeof clockLocations[number]['zone']) {
   return now ? formats.get(zone)!.format(now) : '--:--:--';
 }
-function WorldClocks() {
+function WorldClocks({edition}: {edition: EditionId}) {
   const now = useClock();
   const clockMinute = now ? Math.floor(now.getTime() / 60_000) : null;
   const orderedLocations = useMemo(() => clockMinute === null
@@ -37,7 +37,7 @@ function WorldClocks() {
   const [paused, setPaused] = useState(false);
   return <div className={`world-clock ${paused ? 'is-paused' : ''}`}>
     <div className="clock-track">{[0,1].map(copy => <div className="clock-run" key={copy} aria-hidden={copy === 1}>
-      {orderedLocations.map(place => <span key={place.id} className="city-clock"><span>{place.name}</span><time>{timeAt(now,place.zone)}</time></span>)}
+      {orderedLocations.map(place => <span key={place.id} className={`city-clock${editionForZone(place.zone) === edition ? ' is-regional' : ''}`}><span>{place.name}</span><time>{timeAt(now,place.zone)}</time></span>)}
     </div>)}</div>
     <button className="clock-pause" aria-label={paused ? 'Resume moving clocks' : 'Pause moving clocks'} onClick={() => setPaused(!paused)}>{paused ? '▷' : 'Ⅱ'}</button>
   </div>;
@@ -70,7 +70,7 @@ function LocalClock({edition}: {edition: EditionId}) {
   </div></div>;
 }
 export function Shell({children}: {children:React.ReactNode}) {
-  const {edition, selectEdition} = useEdition();
+  const {edition, defaultEdition, selectEdition} = useEdition();
   const {pathname} = useLocation();
   const [params] = useSearchParams();
   const section = pathname === '/gallery' ? 'gallery' : pathname === '/network' ? 'network' : null;
@@ -87,7 +87,7 @@ export function Shell({children}: {children:React.ReactNode}) {
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${fixedPage ? 'is-fixed-page' : ''} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     {section === 'network' && activeView === 0 && <DesertBackdrop />}
     <a href="#main" className="skip-link">Skip to content</a>
-    <WorldClocks />
+    <WorldClocks edition={edition}/>
     <header className="site-header compact-header">
       <nav className="nav-left" aria-label="Gallery and information"><EntryLink to="/gallery">gallery</EntryLink><EntryLink to="/about">about</EntryLink></nav>
       <div className="flower-center">
@@ -96,6 +96,6 @@ export function Shell({children}: {children:React.ReactNode}) {
       <nav className="nav-right" aria-label="Network and store"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">store</EntryLink></nav>
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock edition={edition}/>{home && <EditionSwitcher edition={edition} onSelect={selectEdition}/>} {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
+    <footer className="site-footer"><LocalClock edition={edition}/>{home && <EditionSwitcher edition={edition} defaultEdition={defaultEdition} onSelect={selectEdition}/>} {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
   </div>;
 }
