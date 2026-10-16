@@ -1,6 +1,7 @@
 import {useEffect, useRef} from 'react';
 import {useSearchParams} from 'react-router';
 import {DesertFeed} from '~/components/DesertFeed';
+import {DesertArchive} from '~/components/DesertArchive';
 import {viewIndex} from '~/content/views';
 
 export function meta(){return [{title:'Network — FORMAL'}];}
@@ -40,6 +41,6 @@ export default function Network(){
   }, [view]);
 
   return view === 0
-    ? <section ref={camoRef} className="network-page network-view-0 desert-camo" aria-label="desert"/>
+    ? <section ref={camoRef} className="network-page network-view-0 desert-camo" aria-label="desert"><DesertArchive/></section>
     : <section className="network-page network-view-1"><DesertFeed/></section>;
 }

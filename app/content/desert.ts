@@ -1,9 +1,19 @@
-// Layout placeholders approved for the first desert feed release.
-export const desertOfferings = [
-  {id: 'film', kind: 'video', location: 'location', detail: '03:24', title: 'video title', description: 'A short description of the film. One or two sentences, then the next offering.'},
-  {id: 'another-film', kind: 'video', location: 'location', detail: '01:48', title: 'another film', description: 'The same horizontal frame, with a few words beneath it.'},
-  {id: 'article', kind: 'article', location: 'location', detail: '4 min read', title: 'article title', description: 'An essay, a conversation, or a longer story — introduced in the same rhythm.'},
-  {id: 'image', kind: 'image', location: 'location', detail: 'image study', title: 'a visual study', description: 'One image or a series of images. A small caption gives it context.'},
-  {id: 'sound', kind: 'sound', location: 'location', detail: '06:12', title: 'sound title', description: 'A recording, a broadcast, or a sound piece can occupy the same space.'},
-  {id: 'note', kind: 'text', location: 'location', detail: 'field note', title: 'a note from the collective', description: 'A shorter thought, an announcement, or something that needs only words.'},
-] as const;
+export type Offering = {
+  id: string;
+  kind: 'text' | 'video' | 'website' | 'collage';
+  location: string;
+  detail: string;
+  title: string;
+  description: string;
+  href?: string;
+  cover?: string;
+};
+
+export const desertOfferings: readonly Offering[] = [
+  {id: 'note', kind: 'text', location: 'the collective', detail: 'a note', title: 'a note from the collective', description: 'words from the collective.'},
+  {id: 'ghost-town', kind: 'video', location: 'strikeout', detail: 'film ↗', title: 'ghost town', description: 'a film by matteo salvadei. watch through strikeout.', href: 'https://www.strikeout.us/#video', cover: 'https://www.strikeout.us/assets/ghost-town-poster.jpg'},
+  {id: 'conamore-launch', kind: 'video', location: 'conamore', detail: 'launch film', title: 'conamore launch video', description: 'an introduction to conamore.'},
+  {id: 'conamore', kind: 'website', location: 'conamore', detail: 'visit ↗', title: 'conamore', description: 'the project, the myth, and all it contains.', href: 'https://www.visitconamore.com/'},
+  {id: 'carlos', kind: 'video', location: 'desert', detail: 'an introduction', title: 'carlos / introducing desert FORMAL', description: 'watch the introduction, then enter the archive.', href: '/network?view=desert'},
+  {id: 'amore-point', kind: 'collage', location: 'amore point', detail: 'a collage', title: 'amore point', description: 'a collage of pictures and collected things.'},
+];

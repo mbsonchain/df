@@ -15,6 +15,8 @@ export default async function handleRequest(
   context: HydrogenRouterContextProvider,
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    mediaSrc: ["'self'", 'https://media.strikeout.us', 'https://cdn.shopify.com'],
+    imgSrc: ["'self'", 'data:', 'https://cdn.shopify.com', 'https://shopify.com', 'https://media.strikeout.us', 'https://www.strikeout.us'],
     styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net'],
     fontSrc: ["'self'", 'https://use.typekit.net', 'https://cdn.shopify.com'],
     shop: {
