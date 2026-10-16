@@ -23,7 +23,7 @@ export default async function handleRequest(
     frameAncestors: isCatalogEmbedPath(new URL(request.url).pathname)
       ? ["'self'", 'https://strikeout.us', 'https://www.strikeout.us', ...(import.meta.env.DEV ? ['http://127.0.0.1:4173', 'http://localhost:4173'] : [])]
       : ["'none'"],
-    styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net'],
+    styleSrc: ["'self'", 'https://cdn.shopify.com', 'https://use.typekit.net', 'https://p.typekit.net', 'https://static.klaviyo.com'],
     fontSrc: ["'self'", 'https://use.typekit.net', 'https://cdn.shopify.com'],
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
