@@ -301,3 +301,12 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .edition-options small{font:9px/1.5 var(--mono);color:var(--quiet)}
 @media(max-width:760px){.edition-menu{bottom:calc(66px + env(safe-area-inset-bottom))}.edition-flower>img{width:20px;height:22px}}
 @media(prefers-reduced-motion:reduce){.edition-flower>img{transition:none}}
+
+/* Public policies for the FORMAL text-message program. */
+.sms-policy-page{max-width:760px;margin:0 auto;padding:28px 24px 110px;font-family:var(--mono,"Courier New",monospace);font-size:15px;line-height:1.6;overflow-wrap:anywhere}
+.sms-policy-page h1{font-family:inherit;font-size:25px;line-height:1.25;margin:0 0 24px}
+.sms-policy-page h2{font-family:inherit;font-size:17px;line-height:1.4;margin:30px 0 10px}
+.sms-policy-page p{margin:12px 0}
+.sms-policy-page a{text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px}
+.sms-policy-page nav{display:flex;gap:24px;flex-wrap:wrap;margin-top:40px}
+@media(max-width:700px){.sms-policy-page{padding:16px 20px 110px;font-size:14px}.sms-policy-page h1{font-size:22px}}
