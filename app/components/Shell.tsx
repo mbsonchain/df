@@ -1,5 +1,6 @@
 import {useEffect, useMemo, useState} from 'react';
-import {Link, NavLink, useLocation, useSearchParams} from 'react-router';
+import {Link, NavLink, useLocation, useRouteLoaderData, useSearchParams} from 'react-router';
+import type {loader as productLoader} from '~/routes/products.$slug';
 import {identity, locations, clockLocationsByTime, type RegionalSite, type SiteId} from '~/content/site';
 import {galleryViews, networkViews, galleryViewLinks, networkViewLinks, viewIndex} from '~/content/views';
 import {homeOnly} from '~/lib/launch';
@@ -64,13 +65,15 @@ export function Shell({children, accessSiteId}: {children: React.ReactNode; acce
   const activeId = accessSiteId ?? browserSiteId;
   const site = locations.find(place => place.id === activeId);
   const {pathname} = useLocation();
+  const productData = useRouteLoaderData<typeof productLoader>('routes/products.$slug');
   const [params] = useSearchParams();
   const section = pathname === '/gallery' ? 'gallery' : pathname === '/network' ? 'network' : null;
   const labels = section === 'gallery' ? galleryViews : networkViews;
   const viewLinks = section === 'gallery' ? galleryViewLinks : networkViewLinks;
   const activeView = section ? viewIndex(section, params.get('view')) : -1;
   const home = pathname === '/';
-  const fixedPage = home || pathname === '/about' || pathname.startsWith('/products/');
+  const productPage = pathname.startsWith('/products/');
+  const fixedPage = home || pathname === '/about' || productPage;
   const network = pathname.startsWith('/network') || pathname === '/website';
   const gallery = section === 'gallery' || pathname.startsWith('/products');
   const flower = <>
@@ -91,6 +94,15 @@ export function Shell({children, accessSiteId}: {children: React.ReactNode; acce
     <footer className="site-footer">
       <LocalClock site={site}/>
       {home && <RegionalSites activeId={activeId}/>}
+      {productPage && (
+        <Link
+          className="product-option product-gallery-back"
+          to={productData?.galleryHref ?? '/gallery'}
+          aria-label="Back to gallery"
+        >
+          <span aria-hidden="true">←</span>
+        </Link>
+      )}
       {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}
       {section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}
     </footer>

@@ -203,34 +203,33 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 
 /* Single pieces use the same cutout, with the title directly below it. */
 .product-page{
-  height:100%;display:grid;
-  grid-template-rows:minmax(0,1fr) auto;gap:clamp(8px,3cqh,24px);
+  height:100%;display:grid;align-content:center;justify-items:center;
+  grid-template-rows:minmax(0,476px) auto;
   padding-block:clamp(4px,2cqh,18px) clamp(8px,4cqh,28px);
 }
 .product-study{
   display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;
-  align-items:center;place-self:center;width:min(100%,640px);height:100%;max-height:476px;
+  align-items:center;width:min(100%,640px);height:100%;
   padding-inline:clamp(20px,5vw,46px);
   min-height:0;gap:clamp(2px,1.2cqh,10px)
 }
 .product-study .artwork{width:100%;height:100%;max-width:400px;max-height:440px;min-height:0}
 .product-study figcaption{position:relative}
 .product-study h1{font:400 14px/1.35 var(--mono);text-align:center}
-.product-options{display:flex;align-items:end;justify-content:space-between;gap:12px;padding-inline:var(--footer-gutter)}
 .product-option{
   display:inline-flex;align-items:center;justify-content:center;min-height:44px;
   padding:0 16px;background:transparent;color:var(--ink);
   font:400 11px/1.25 var(--mono);white-space:nowrap;text-decoration:none;cursor:pointer;
   -webkit-tap-highlight-color:transparent
 }
-.product-options>.product-option{padding-inline-start:0}
+.product-gallery-back{grid-area:1 / 2;justify-self:center;width:44px;padding:0;font-size:22px;line-height:1}
 .product-option:hover{color:var(--ink)}
 .product-option:focus-visible{outline:none;font-weight:700}
-.product-release summary{list-style:none;padding-inline-end:0}
+.product-release summary{list-style:none}
 .product-release summary::-webkit-details-marker{display:none}
 .product-release-note{
   display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;
-  width:max-content;min-width:100%;min-height:100%;text-align:center;
+  width:max-content;min-width:100%;min-height:100%;text-align:center;pointer-events:none;
   max-width:min(230px,80vw);padding:10px 13px;border:1px solid var(--pink);
   background:var(--paper);box-shadow:2px 2px 0 #1515151a;font:400 11px/1.45 var(--mono)
 }
