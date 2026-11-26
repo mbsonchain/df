@@ -1,9 +1,18 @@
 import {useNonce} from '@shopify/hydrogen';
-import {Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation} from 'react-router';
+import {Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useLocation, type LoaderFunctionArgs} from 'react-router';
 import {Shell} from '~/components/Shell';
 import {viewIndex} from '~/content/views';
 import skeletonStyles from '~/styles/skeleton.css?url';
 import {isCatalogEmbedPath} from '~/lib/catalog-embed';
+import {siteForAccess} from '~/lib/regional-site';
+
+export function loader({request}: LoaderFunctionArgs) {
+  if (isCatalogEmbedPath(new URL(request.url).pathname)) return {siteId: null};
+  return {siteId: siteForAccess(request.headers)};
+}
+
+// The document and route data contain the regional site selected for this request.
+export function headers() {return {'Cache-Control': 'private, no-store'};}
 
 export function links() {return [{rel: 'stylesheet', href: 'https://use.typekit.net/sji2png.css'}, {rel: 'stylesheet', href: skeletonStyles}];}
 
@@ -30,8 +39,9 @@ export function Layout({children}: {children?: React.ReactNode}) {
 
 export default function App() {
   const {pathname} = useLocation();
+  const {siteId} = useLoaderData<typeof loader>();
   if (isCatalogEmbedPath(pathname)) return <Outlet />;
-  return <Shell><Outlet /></Shell>;
+  return <Shell accessSiteId={siteId}><Outlet /></Shell>;
 }
 
 export function ErrorBoundary() {

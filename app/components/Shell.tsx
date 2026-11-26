@@ -1,12 +1,12 @@
 import {useEffect, useMemo, useState} from 'react';
 import {Link, NavLink, useLocation, useSearchParams} from 'react-router';
-import {identity, locations, clockLocations, clockLocationsByTime} from '~/content/site';
+import {identity, locations, clockLocationsByTime, type RegionalSite, type SiteId} from '~/content/site';
 import {galleryViews, networkViews, galleryViewLinks, networkViewLinks, viewIndex} from '~/content/views';
 import {homeOnly} from '~/lib/launch';
 import {FormalText} from './FormalText';
 import {ViewToggle} from './ViewToggle';
 import {DesertBackdrop} from './DesertBackdrop';
-import {EditionSwitcher, editions, editionForZone, useEdition, type EditionId} from './EditionSwitcher';
+import {RegionalSites} from './RegionalSites';
 
 function EntryLink({to, children}: {to:string; children:React.ReactNode}) {
   const {pathname} = useLocation();
@@ -24,53 +24,45 @@ function useClock() {
   }, []);
   return now;
 }
-const formats = new Map<string, Intl.DateTimeFormat>(clockLocations.map(place => [place.zone, new Intl.DateTimeFormat('en-GB', {timeZone:place.zone, hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false})]));
-function timeAt(now: Date | null, zone: typeof clockLocations[number]['zone']) {
+const formats = new Map<string, Intl.DateTimeFormat>(locations.map(place => [place.zone, new Intl.DateTimeFormat('en-GB', {timeZone:place.zone, hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false})]));
+function timeAt(now: Date | null, zone: RegionalSite['zone']) {
   return now ? formats.get(zone)!.format(now) : '--:--:--';
 }
-function WorldClocks({edition}: {edition: EditionId}) {
+function WorldClocks({activeId}: {activeId: SiteId | null}) {
   const now = useClock();
   const clockMinute = now ? Math.floor(now.getTime() / 60_000) : null;
   const orderedLocations = useMemo(() => clockMinute === null
-    ? clockLocations
+    ? locations
     : clockLocationsByTime(new Date(clockMinute * 60_000)), [clockMinute]);
-  const [paused, setPaused] = useState(false);
-  return <div className={`world-clock ${paused ? 'is-paused' : ''}`}>
+  return <div className="world-clock">
     <div className="clock-track">{[0,1].map(copy => <div className="clock-run" key={copy} aria-hidden={copy === 1}>
-      {orderedLocations.map(place => <span key={place.id} className={`city-clock${editionForZone(place.zone) === edition ? ' is-regional' : ''}`}><span>{place.name}</span><time>{timeAt(now,place.zone)}</time></span>)}
+      {orderedLocations.map(place => <span key={place.id} className="city-clock" aria-current={place.id === activeId ? 'location' : undefined}>
+        <span>{place.name}</span><time>{timeAt(now,place.zone)}</time>
+      </span>)}
     </div>)}</div>
-    <button className="clock-pause" aria-label={paused ? 'Resume moving clocks' : 'Pause moving clocks'} onClick={() => setPaused(!paused)}>{paused ? '▷' : 'Ⅱ'}</button>
   </div>;
 }
-function LocalClock({edition}: {edition: EditionId}) {
+function LocalClock({site}: {site: RegionalSite | undefined}) {
   const now = useClock();
-  const [placeId, setPlaceId] = useState<string>('milano');
-  useEffect(() => {
-    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const exact = locations.find(place => place.zone === zone);
-    if (exact) {setPlaceId(exact.id); return;}
-    // Time-zone proximity is an estimate, without asking for precise location.
-    const offset = (timeZone:string) => {
-      const name = new Intl.DateTimeFormat('en-US',{timeZone,timeZoneName:'shortOffset'}).formatToParts(new Date()).find(part=>part.type==='timeZoneName')?.value ?? 'GMT';
-      const match = name.match(/GMT([+-])(\d+)(?::(\d+))?/);
-      return match ? (match[1]==='-'?-1:1)*(Number(match[2])*60+Number(match[3]??0)) : 0;
-    };
-    const visitorOffset = offset(zone);
-    const northernEurope = ['Europe/Stockholm','Europe/Oslo','Europe/Helsinki','Europe/Berlin','Europe/Warsaw'].includes(zone);
-    const ranked = [...locations].sort((a,b)=>{
-      const distance=(place:typeof locations[number])=>{const gap=Math.abs(offset(place.zone)-visitorOffset);return Math.min(gap,1440-gap);};
-      return distance(a)-distance(b) || (northernEurope ? Number(b.id==='copenhagen')-Number(a.id==='copenhagen') : 0);
-    });
-    setPlaceId(ranked[0].id);
-  }, []);
-  const place = locations.find(item => item.id === placeId) ?? locations[4];
-  return <div className="local-clock"><span className="local-brand"><FormalText>{editions.find(item => item.id === edition)!.name}</FormalText></span><div>
-    <span className="location-name">{place.name}</span>
-    <time>{timeAt(now,place.zone)}</time>
-  </div></div>;
+  if (!site) return null;
+  return <div className="local-clock">
+    <span className="local-brand"><FormalText>{site.brand}</FormalText></span>
+    <div><span className="location-name">{site.name}</span><time>{timeAt(now,site.zone)}</time></div>
+  </div>;
 }
-export function Shell({children}: {children:React.ReactNode}) {
-  const {edition, defaultEdition, selectEdition} = useEdition();
+export function Shell({children, accessSiteId}: {children: React.ReactNode; accessSiteId: SiteId | null}) {
+  const [browserSiteId, setBrowserSiteId] = useState<SiteId | null>(null);
+  useEffect(() => {
+    if (accessSiteId) return;
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // Visits already located by Oxygen don't need the time-zone coordinate table.
+    import('~/lib/regional-site').then(
+      ({siteForTimeZone}) => setBrowserSiteId(siteForTimeZone(zone) ?? 'conamore'),
+      () => setBrowserSiteId('conamore'),
+    );
+  }, [accessSiteId]);
+  const activeId = accessSiteId ?? browserSiteId;
+  const site = locations.find(place => place.id === activeId);
   const {pathname} = useLocation();
   const [params] = useSearchParams();
   const section = pathname === '/gallery' ? 'gallery' : pathname === '/network' ? 'network' : null;
@@ -87,7 +79,7 @@ export function Shell({children}: {children:React.ReactNode}) {
   return <div className={`site-shell ${home ? 'is-home' : 'is-inside'} ${fixedPage ? 'is-fixed-page' : ''} ${network ? 'is-network' : gallery ? 'is-gallery' : ''}`}>
     {section === 'network' && activeView === 0 && <DesertBackdrop />}
     <a href="#main" className="skip-link">Skip to content</a>
-    <WorldClocks edition={edition}/>
+    <WorldClocks activeId={activeId}/>
     <header className="site-header compact-header">
       <nav className="nav-left" aria-label="Gallery and information"><EntryLink to="/gallery">gallery</EntryLink><EntryLink to="/about">about</EntryLink></nav>
       <div className="flower-center">
@@ -96,6 +88,11 @@ export function Shell({children}: {children:React.ReactNode}) {
       <nav className="nav-right" aria-label="Network and store"><EntryLink to="/network">network</EntryLink><EntryLink to="/cart">store</EntryLink></nav>
     </header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer className="site-footer"><LocalClock edition={edition}/>{home && <EditionSwitcher edition={edition} defaultEdition={defaultEdition} onSelect={selectEdition}/>} {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}{section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}</footer>
+    <footer className="site-footer">
+      <LocalClock site={site}/>
+      {home && <RegionalSites activeId={activeId}/>}
+      {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}
+      {section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}
+    </footer>
   </div>;
 }

@@ -7,20 +7,14 @@ export const identity = {
 export const locations = [
   {id:'kilauea', name:'Kilauea', zone:'Pacific/Honolulu', brand:'Island Formal', latitude:22.211, longitude:-159.412},
   {id:'conamore', name:'Conamore', zone:'America/Los_Angeles', brand:'Desert Formal', latitude:34.052, longitude:-118.244},
-  {id:'cdmx', name:'CDMX', zone:'America/Mexico_City', brand:'Desert Formal', latitude:19.433, longitude:-99.133},
-  {id:'london', name:'London', zone:'Europe/London', brand:'Freetown Formal', latitude:51.507, longitude:-.128},
-  {id:'milano', name:'Milano', zone:'Europe/Rome', brand:'Spazio Libero', latitude:45.464, longitude:9.19},
   {id:'copenhagen', name:'Copenhagen', zone:'Europe/Copenhagen', brand:'Freetown Formal', latitude:55.676, longitude:12.568},
+  {id:'milano', name:'Milano', zone:'Europe/Rome', brand:'Spazio Libero', latitude:45.464, longitude:9.19},
 ] as const;
-// The top strip can include destinations independently of the regional footer.
-export const clockLocations = [
-  ...locations,
-  {id:'amsterdam', name:'Amsterdam', zone:'Europe/Amsterdam'},
-  {id:'cape-town', name:'Cape Town', zone:'Africa/Johannesburg'},
-] as const;
+export type RegionalSite = (typeof locations)[number];
+export type SiteId = RegionalSite['id'];
 // Sort by the current UTC offset so daylight-saving transitions stay correct.
 export function clockLocationsByTime(at: Date) {
-  return clockLocations.map(place => {
+  return locations.map(place => {
     const label = new Intl.DateTimeFormat('en-US', {
       timeZone: place.zone, timeZoneName: 'shortOffset',
     }).formatToParts(at).find(part => part.type === 'timeZoneName')?.value ?? 'GMT';
