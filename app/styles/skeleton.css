@@ -239,7 +239,7 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .product-release-note{
   display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;
   width:max-content;min-width:100%;min-height:100%;text-align:center;pointer-events:none;
-  max-width:min(230px,80vw);padding:10px 13px;border:1px solid var(--pink);
+  max-width:min(230px,80vw);padding:11px 14px;
   background:var(--paper);box-shadow:2px 2px 0 #1515151a;font:400 11px/1.45 var(--mono)
 }
 .product-page:has(.product-release[open]) .product-release-note{display:block}
@@ -351,11 +351,12 @@ html:has(.desert-camo),body:has(.desert-camo){overflow:hidden;overscroll-behavio
 .edition-flower{display:grid;place-items:center;width:44px;height:44px}
 .edition-flower>img{width:24px;height:26px;object-fit:contain;transition:transform .2s}
 .edition-flower:hover>img{transform:rotate(12deg)}
-.edition-menu{position:fixed;inset:auto auto calc(76px + env(safe-area-inset-bottom)) 50%;transform:translateX(-50%);margin:0;padding:10px 18px 16px;width:min(320px,calc(100vw - 32px));max-height:calc(100dvh - 110px);overflow:auto;border:1px solid var(--pink);background:var(--paper);color:var(--ink);text-align:left;box-shadow:0 6px 22px #15151512}
+.edition-menu{position:fixed;inset:auto auto calc(76px + env(safe-area-inset-bottom)) 50%;transform:translateX(-50%);margin:0;padding:30px 18px 16px;width:min(320px,calc(100vw - 32px));max-height:calc(100dvh - 110px);overflow:auto;border:1px solid var(--pink);background:var(--paper);color:var(--ink);text-align:left;box-shadow:0 6px 22px #15151512}
 .edition-menu::backdrop{background:#ffffff77}
-.edition-menu-close{display:block;margin-inline-start:auto;width:32px;height:44px;font-size:20px}
+.edition-menu-close{position:absolute;top:8px;right:12px;width:44px;height:44px;font-size:20px}
 .edition-options{display:grid;gap:4px;margin:0;padding:0;list-style:none}
 .edition-options>li{display:grid;gap:4px;min-height:54px;padding:8px 0;font:11px/1.5 var(--mono)}
+.edition-options>li:first-child{padding-inline-end:40px}
 .edition-options>li[aria-current=location]{color:var(--pink)}
 .edition-options small{font:9px/1.5 var(--mono);color:var(--quiet)}
 @media(max-width:760px){.edition-menu{bottom:calc(66px + env(safe-area-inset-bottom))}.edition-flower>img{width:20px;height:22px}}
