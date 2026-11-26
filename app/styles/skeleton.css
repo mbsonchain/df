@@ -40,6 +40,15 @@ html:has(.is-fixed-page),body:has(.is-fixed-page){overflow:hidden;overscroll-beh
 .is-fixed-page .about-section{margin:0;align-self:center}
 .is-fixed-page .about-section h2{font-size:clamp(10px,2.2cqh,14px);line-height:1.3;margin-bottom:clamp(5px,1.6cqh,14px)}
 .is-fixed-page .about-section p{font-size:clamp(8px,1.8cqh,12px);line-height:1.6;letter-spacing:0}
+#purchasing {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.purchasing-link:focus { outline: none; }
+.purchasing-link:focus-visible {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+}
 .is-fixed-page .about-colophon{margin:0;font-size:clamp(8px,1.6cqh,10px);line-height:1.5}
 .is-fixed-page .about-colophon nav{margin:0 0 5px;gap:24px}
 .is-fixed-page .about-colophon a{padding:4px 0}
