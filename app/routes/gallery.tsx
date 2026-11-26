@@ -29,6 +29,7 @@ export default function Gallery() {
   },[view]);
   return <section className={`gallery-page gallery-view-${view}`} aria-label="Product gallery">
     {view===0 ? <div ref={belt} className="conveyor" onDragStart={event=>event.preventDefault()} role="region" aria-label="Single product view" tabIndex={0} onKeyDown={event=>{if(event.key==='ArrowLeft'){event.preventDefault();rotate(-1);}if(event.key==='ArrowRight'){event.preventDefault();rotate(1);}}} onPointerDown={event=>{if(event.button!==0)return;pointer.current={x:event.clientX,y:event.clientY};swiped.current=false;}} onPointerUp={event=>{if(pointer.current){const dx=event.clientX-pointer.current.x;const dy=event.clientY-pointer.current.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)){swiped.current=true;rotate(dx<0?1:-1);}}pointer.current=null;}} onPointerCancel={()=>{pointer.current=null;}} onClickCapture={event=>{if(swiped.current){event.preventDefault();event.stopPropagation();swiped.current=false;}}}>
+      <h1 className="belt-season">FORMAL AW27</h1>
       <button className="belt-step belt-step-left" aria-label="Previous product" onClick={()=>rotate(-1)}/>
       <button className="belt-step belt-step-right" aria-label="Next product" onClick={()=>rotate(1)}/>
       {products.map((product,index)=>{
@@ -43,7 +44,7 @@ export default function Gallery() {
       })}
       <div className="belt-position" aria-live="polite">
         <Link className="belt-name" to={`/products/${products[center].slug}`} tabIndex={-1}>{products[center].name}</Link>
-        <span>{String(center+1).padStart(2,'0')} / {String(products.length).padStart(2,'0')}</span>
+        <span>CONAMORE</span>
       </div>
     </div> : <div className="product-grid">
       {products.map(product => <Link key={product.slug} to={`/products/${product.slug}?view=all`}>

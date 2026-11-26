@@ -12,11 +12,8 @@ export function RegionalSites({activeId}: {activeId: SiteId | null}) {
       <img src={identity.flowerTransparent} alt="" width="24" height="26"/>
     </button>
     <dialog id="edition-menu" className="edition-menu" ref={dialog}
-      onClose={() => setOpen(false)} aria-labelledby="edition-menu-title">
-      <div className="edition-menu-heading">
-        <h2 id="edition-menu-title">choose your site</h2>
-        <button type="button" aria-label="Close regional sites" onClick={() => dialog.current?.close()}>×</button>
-      </div>
+      onClose={() => setOpen(false)} aria-label="Regional sites">
+      <button className="edition-menu-close" type="button" aria-label="Close regional sites" onClick={() => dialog.current?.close()}>×</button>
       <ul className="edition-options">
         {locations.map(site => <li key={site.id} aria-current={site.id === activeId ? 'location' : undefined}>
           <span><FormalText>{site.brand}</FormalText>{site.id === activeId && ' (default)'}</span>
