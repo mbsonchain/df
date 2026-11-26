@@ -70,7 +70,7 @@ export function Shell({children, accessSiteId}: {children: React.ReactNode; acce
   const viewLinks = section === 'gallery' ? galleryViewLinks : networkViewLinks;
   const activeView = section ? viewIndex(section, params.get('view')) : -1;
   const home = pathname === '/';
-  const fixedPage = home || pathname === '/about';
+  const fixedPage = home || pathname === '/about' || pathname.startsWith('/products/');
   const network = pathname.startsWith('/network') || pathname === '/website';
   const gallery = section === 'gallery' || pathname.startsWith('/products');
   const flower = <>

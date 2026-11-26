@@ -1,13 +1,113 @@
-type Props = {kind: string; className?: string};
-export function Artwork({kind, className = ''}: Props) {
-  return <svg className={`artwork ${className}`} viewBox="0 0 400 440" aria-hidden="true" focusable="false">
-    {kind === 'landscape' && <><rect width="400" height="440" fill="#ffffff"/><circle cx="300" cy="94" r="34" fill="#ffffff"/><path d="M0 250 105 158 210 278 300 200 400 261V440H0Z" fill="#000000"/><path d="M0 300 150 250 260 320 400 270V440H0Z" fill="#000000"/><path d="m200 440 24-135 13 135" fill="#ffffff"/></>}
-    {kind === 'horizon' && <><rect width="400" height="440" fill="#ffffff"/><rect y="237" width="400" height="203" fill="#000000"/><path d="M0 291q100-20 200 0t200 0M0 350q100-20 200 0t200 0" fill="none" stroke="#000000" strokeWidth="2"/><circle cx="110" cy="119" r="39" fill="#ffffff"/></>}
-    {kind === 'flower' && <><rect width="400" height="440" fill="#ffffff"/><path d="M190 410q-20-130 30-235m-24 120q-70-65-109-35 49 59 109 35m5-35q63-65 101-40-30 56-101 40" fill="none" stroke="#000000" strokeWidth="6"/><g fill="#ffffff" stroke="#000000" strokeWidth="2"><ellipse cx="218" cy="134" rx="33" ry="61"/><ellipse cx="218" cy="134" rx="33" ry="61" transform="rotate(72 218 134)"/><ellipse cx="218" cy="134" rx="33" ry="61" transform="rotate(144 218 134)"/></g><circle cx="218" cy="134" r="18" fill="#000000"/></>}
-    {kind === 'shirt' && <g stroke="#000000" strokeWidth="2" strokeLinejoin="round"><path d="m151 96-76 39-44 99 66 26 22-43-9 145h181l-9-145 22 43 66-26-44-99-76-39q-49 38-99 0Z" fill="currentColor"/><path d="M151 96q47 75 99 0M121 316h166m-175 35h176M167 113q31 26 65 0" fill="none" opacity=".4"/></g>}
-    {kind === 'cap' && <g stroke="#000000" strokeWidth="3"><path d="M85 259q-9-127 113-134 121 4 127 139Z" fill="currentColor"/><path d="M85 259q99-47 240 5l51 32q-117 64-249 4Z" fill="currentColor"/><path d="M199 126q-37 34-30 110m30-110q60 26 60 117" fill="none" opacity=".4"/></g>}
-    {kind === 'tote' && <g stroke="#000000" strokeWidth="3"><path d="M104 165h190l17 209H90Z" fill="currentColor"/><path d="M144 175V118q0-76 49-76t49 76v57" fill="none" strokeWidth="14"/><text x="200" y="279" textAnchor="middle" fill="#000000" stroke="none" fontSize="32" fontFamily="articulat-cf, sans-serif" fontWeight="900">FORMAL</text></g>}
-    {kind === 'book' && <><path d="m102 94 201 26v248l-201-27Z" fill="currentColor" stroke="#000000" strokeWidth="3"/><path d="m116 100 1 242m1-166 164 21" stroke="#000000" strokeWidth="2"/><text x="143" y="229" fill="#000000" fontSize="27" fontFamily="articulat-cf, sans-serif" fontWeight="900" transform="rotate(7 143 229)">Collected</text><text x="153" y="265" fill="#000000" fontSize="27" fontFamily="articulat-cf, sans-serif" fontWeight="900" transform="rotate(7 153 265)">pages.</text></>}
-    {kind === 'vase' && <><path d="M162 88h77l-7 114q77 70 49 151-78 39-157 0-25-89 48-151Z" fill="currentColor" stroke="#000000" strokeWidth="3"/><ellipse cx="200" cy="88" rx="38" ry="8" fill="#000000"/><path d="M162 300q35 13 75 1m-99 27q53 20 120 0" fill="none" stroke="#000000" strokeWidth="3"/></>}
+import type {Product} from '~/content/products';
+
+// Each shape has the same artboard in the carousel, the grid and the product page.
+// Interior cutouts are limited to openings such as bag handles and the belt buckle.
+const outlines = {
+  'hooded-work-jacket': `
+    M92 64 C89 53 92 35 100 26 Q110 17 123 17 Q143 21 149 35
+    Q154 49 149 64 L166 69 L186 77 Q193 81 197 94 L215 152
+    L226 196 Q228 201 225 204 L227 208 L204 215 L200 206
+    Q196 205 194 198 L177 153 L173 187 L175 207 Q174 211 168 211
+    L69 211 Q65 211 65 207 L66 185 L64 151 L46 199 Q45 204 40 205
+    L37 215 L14 207 L17 199 Q13 195 16 187 L29 142 L43 90
+    Q46 80 54 76 L75 69 Z`,
+  'eisenhower-jacket': `
+    M98 56 Q120 48 141 56 L149 69 L169 74 L184 79 Q192 84 197 101
+    L215 160 L223 205 L218 207 L219 215 L196 219 L194 211
+    Q190 210 190 203 L173 150 L173 202 Q173 207 167 208
+    Q121 212 72 208 Q66 208 66 204 L66 149 L51 199 Q49 208 45 210
+    L43 219 L20 214 L21 206 L17 203 L27 154 L44 98 Q48 82 56 78
+    L88 69 Z
+    M103 58 L118 70 L114 79 Z M137 58 L126 79 L122 70 Z`,
+  hoodie: `
+    M87 70 Q82 60 86 44 Q89 31 101 22 Q114 16 122 10
+    Q126 10 129 14 Q143 22 151 35 Q159 52 153 69 Q175 72 187 82 Q193 87 200 106
+    Q212 130 219 159 Q224 178 226 191 Q227 197 222 202
+    L223 210 L202 217 L198 208 Q192 207 189 198 L171 155
+    Q171 176 175 195 Q177 207 169 214 L166 225 Q121 231 75 225
+    L72 214 Q63 208 65 195 Q69 174 69 155 L51 199 Q47 207 41 208
+    L38 217 L17 210 L20 200 Q13 199 15 189 Q19 159 33 127
+    L45 97 Q51 81 63 77 Z`,
+  oxford: `
+    M99 40 Q119 33 139 40 L145 53 Q168 60 179 66 Q187 73 191 94
+    L201 151 L212 205 L211 213 L191 217 L187 205 L175 167 L163 123
+    Q161 161 166 194 L169 211 Q153 228 130 232 Q124 233 120 229
+    Q112 234 104 232 Q82 230 69 215 L72 195 Q77 161 75 123
+    L63 168 L51 205 L48 217 L28 213 L29 203 L40 148 L49 95
+    Q53 73 60 68 Q74 60 92 54 Z
+    M102 43 L118 57 L109 68 Z M136 43 L129 68 L122 57 Z`,
+  tee: `
+    M93 58 Q96 68 106 72 Q120 77 133 71 Q143 67 146 58
+    L166 64 L184 71 Q190 74 195 83 L218 117 L193 135
+    Q187 139 183 140 L168 122 L170 208 Q145 212 119 211
+    Q92 213 68 208 L71 122 L55 140 L22 118 L45 82 Q51 74 58 70
+    L76 63 Z`,
+  pants: `
+    M75 34 Q118 39 162 34 L168 68 Q171 89 170 108 L177 219
+    L178 236 Q156 241 132 239 L128 206 L120 130 L111 202 L108 240
+    Q84 242 61 236 L62 219 L68 110 Q66 92 69 73 Z`,
+  duffel: `
+    M42 118 Q50 107 66 104 L82 102 Q86 82 95 72 Q104 61 116 63
+    Q126 58 137 64 Q152 74 159 102 L177 105 Q197 108 203 125
+    L214 172 Q218 188 208 195 Q202 199 190 199 L49 199
+    Q29 199 25 190 Q21 182 25 168 L34 132 Q37 121 42 118 Z
+    M91 102 Q96 82 105 76 Q112 70 120 72 Q136 74 147 102
+    Q117 98 91 102 Z`,
+  'shoulder-bag': `
+    M58 136 Q68 119 81 109 Q94 92 104 68 Q111 45 129 43
+    Q151 38 160 56 Q176 82 181 117 Q186 131 193 143
+    Q201 160 196 180 Q191 203 169 212 Q139 223 102 220
+    Q72 218 52 202 Q37 191 40 174 Q45 155 58 136 Z
+    M84 130 Q105 108 115 78 Q125 50 136 56 Q149 61 157 90
+    Q165 114 165 132 Q151 144 133 146 Q106 148 84 130 Z`,
+  'passport-wallet': `
+    M70 66 Q70 59 78 59 L155 55 Q162 55 163 63 L170 63
+    Q176 63 176 69 L176 203 Q176 209 170 209 L79 209
+    Q68 209 68 199 Z
+    M80 68 L159 62 L159 67 L80 73 Z`,
+  cardholder: `
+    M42 108 Q42 103 47 102 L55 101 L55 95 Q55 90 61 90
+    L174 86 Q179 86 180 92 L181 99 L190 99 Q196 99 196 105
+    L199 173 Q199 179 193 180 L51 184 Q44 184 44 177 Z
+    M53 111 L77 110 Q87 109 93 113 L101 118 Q107 121 117 121
+    L182 118 L182 121 L115 125 Q105 125 99 122 L90 117
+    Q84 113 77 113 L53 114 Z`,
+  ushanka: `
+    M49 147 L45 142 L48 138 L43 139 L46 129 L41 132 L45 120
+    L41 120 L48 107 L45 107 Q48 92 56 79 L52 80 L61 69
+    L58 69 Q66 58 75 53 L71 52 L85 46 L82 44 L95 41
+    L94 38 L108 38 L111 34 L117 37 L123 33 L128 36 L134 32
+    L138 37 L145 35 L150 41 L155 40 L158 46 L163 44
+    L171 53 L173 51 L178 60 L183 59 L184 67 Q193 76 197 93
+    L201 91 L200 103 L204 101 L203 112 L207 111 L204 124
+    L208 123 L204 137 L208 136 L203 149 Q209 167 207 180
+    L210 179 L206 190 L209 188 L204 199 L205 201 L198 205
+    L198 209 L191 210 L188 215 L185 214 Q186 224 191 232
+    Q192 236 188 236 Q183 231 180 216 L175 211
+    L172 212 Q164 204 161 190 L155 166 Q133 157 106 159
+    L87 163 Q85 181 76 194 L72 202 L67 202 L65 207 L58 205
+    L55 209 Q54 221 48 231 Q45 234 44 230 Q50 217 51 205
+    L47 207 L44 200 L39 199 L40 192 L36 192
+    L40 185 L36 185 L40 173 L36 175 L41 162 L39 161 Z`,
+  headscarf: `
+    M30 77 Q62 70 96 67 Q124 64 151 68 L186 74 Q198 75 208 69
+    L202 84 Q197 91 189 94 Q200 98 214 98 L223 96 Q216 110 207 117
+    Q193 113 180 106 Q174 104 171 106 Q157 130 142 158
+    L121 199 Q115 207 111 211 Q98 188 86 176 L54 139
+    Q34 119 17 111 Q30 95 37 92 Q39 85 30 77 Z`,
+  belt: `
+    M29 129 Q45 102 79 96 Q119 88 164 97 Q187 100 196 109
+    Q207 122 196 133 Q188 142 178 148 L192 152 Q203 156 218 155
+    L230 155 L220 171 Q206 176 187 171 L157 162 Q137 167 108 168
+    Q85 170 66 163 L58 169 Q55 171 50 169 L24 156
+    Q19 154 20 148 Z
+    M43 127 Q60 111 85 106 Q123 99 161 108 Q184 112 186 119
+    Q188 127 162 137 Q116 151 73 143 L67 137 Z
+    M29 149 L36 136 L59 146 L54 158 Z`,
+} satisfies Record<Product['art'], string>;
+
+export function Artwork({kind}: {kind: Product['art']}) {
+  return <svg className="artwork" viewBox="0 0 240 264" aria-hidden="true" focusable="false">
+    <path fill="#000" fillRule="evenodd" d={outlines[kind]}/>
   </svg>;
 }

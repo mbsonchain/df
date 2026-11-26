@@ -1,13 +1,13 @@
 import {useEffect, useRef, useState} from 'react';
 import {Link, useSearchParams} from 'react-router';
-import {products} from '~/content/editorial';
+import {products} from '~/content/products';
 import {Artwork} from '~/components/Artwork';
 import {viewIndex} from '~/content/views';
 export function meta() {return [{title:'Gallery — FORMAL'}];}
 export default function Gallery() {
   const [params] = useSearchParams();
   const view = viewIndex('gallery', params.get('view'));
-  const [center,setCenter] = useState(0);
+  const [center,setCenter] = useState(() => Math.max(0, products.findIndex(product => product.slug === params.get('item'))));
   const belt = useRef<HTMLDivElement>(null);
   const wheelAt = useRef(0);
   const pointer = useRef<{x:number;y:number} | null>(null);
@@ -41,7 +41,15 @@ export default function Gallery() {
           {active ? <Link to={`/products/${product.slug}`} aria-label={product.name}>{visual}</Link> : visual}
         </div>;
       })}
-      <div className="belt-position" aria-live="polite">{String(center+1).padStart(2,'0')} / {String(products.length).padStart(2,'0')}</div>
-    </div> : <div className="product-grid">{products.map(product=><Link key={product.slug} to={`/products/${product.slug}`} aria-label={product.name}><div className="grid-art"><Artwork kind={product.art}/></div></Link>)}</div>}
+      <div className="belt-position" aria-live="polite">
+        <Link className="belt-name" to={`/products/${products[center].slug}`} tabIndex={-1}>{products[center].name}</Link>
+        <span>{String(center+1).padStart(2,'0')} / {String(products.length).padStart(2,'0')}</span>
+      </div>
+    </div> : <div className="product-grid">
+      {products.map(product => <Link key={product.slug} to={`/products/${product.slug}?view=all`}>
+        <span className="grid-art"><Artwork kind={product.art}/></span>
+        <span className="grid-product-name">{product.name}</span>
+      </Link>)}
+    </div>}
   </section>;
 }

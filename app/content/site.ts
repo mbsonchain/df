@@ -5,10 +5,10 @@ export const identity = {
   flowerTransparent: 'https://cdn.shopify.com/s/files/1/0690/9103/3319/files/formal-flower-transparent.png?v=1792027869&width=320',
 };
 export const locations = [
-  {id:'kilauea', name:'Kilauea', zone:'Pacific/Honolulu', brand:'Island Formal', latitude:22.211, longitude:-159.412},
-  {id:'conamore', name:'Conamore', zone:'America/Los_Angeles', brand:'Desert Formal', latitude:34.052, longitude:-118.244},
-  {id:'copenhagen', name:'Copenhagen', zone:'Europe/Copenhagen', brand:'Freetown Formal', latitude:55.676, longitude:12.568},
-  {id:'milano', name:'Milano', zone:'Europe/Rome', brand:'Spazio Libero', latitude:45.464, longitude:9.19},
+  {id:'kilauea', name:'Kilauea', zone:'Pacific/Honolulu', brand:'Island Formal', territory:'hawaii', latitude:22.211, longitude:-159.412},
+  {id:'conamore', name:'Conamore', zone:'America/Los_Angeles', brand:'Desert Formal', territory:'rest of americas / asia / pacific', latitude:34.052, longitude:-118.244},
+  {id:'copenhagen', name:'Copenhagen', zone:'Europe/Copenhagen', brand:'Freetown Formal', territory:'rest of europe / africa / atlantic', latitude:55.676, longitude:12.568},
+  {id:'milano', name:'Milano', zone:'Europe/Rome', brand:'Spazio Libero', territory:'italia', latitude:45.464, longitude:9.19},
 ] as const;
 export type RegionalSite = (typeof locations)[number];
 export type SiteId = RegionalSite['id'];

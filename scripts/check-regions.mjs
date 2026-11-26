@@ -10,7 +10,13 @@ const env = {
   PUBLIC_STOREFRONT_API_TOKEN: 'offline-region-check',
   PUBLIC_CHECKOUT_DOMAIN: 'example.myshopify.com',
 };
-const cities = ['Kilauea', 'Conamore', 'Copenhagen', 'Milano'];
+const territories = {
+  Kilauea: 'hawaii',
+  Conamore: 'rest of americas / asia / pacific',
+  Copenhagen: 'rest of europe / africa / atlantic',
+  Milano: 'italia',
+};
+const cities = Object.keys(territories);
 async function page(path, coordinates, zone) {
   const headers = new Headers({'user-agent': 'Googlebot'});
   if (coordinates) {
@@ -44,9 +50,9 @@ for (const [coordinates, zone, expected] of [
   assert.ok(html.includes('<span class="location-name">' + expected + '</span>'));
   assert.doesNotMatch(html, /pause moving clocks|resume moving clocks/i);
   const directory = html.match(/<ul class="edition-options">(.*?)<\/ul>/s)[1];
-  assert.deepEqual([...directory.matchAll(/<small>(\w+)<\/small>/g)].map(match => match[1]), cities);
+  assert.deepEqual([...directory.matchAll(/<small>([^<]+)<\/small>/g)].map(match => match[1]), Object.values(territories));
   assert.equal(directory.match(/aria-current="location"/g)?.length, 1);
-  assert.ok(directory.match(/<li aria-current="location">(.*?)<\/li>/s)[1].includes('<small>' + expected + '</small>'));
+  assert.ok(directory.match(/<li aria-current="location">(.*?)<\/li>/s)[1].includes('<small>' + territories[expected] + '</small>'));
   assert.doesNotMatch(directory, /<(button|a|input|select)\b/);
 }
 

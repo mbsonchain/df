@@ -1,10 +1,55 @@
-import {Link, useParams} from 'react-router';
-import {products} from '~/content/editorial';
+import {
+  Link, isRouteErrorResponse, redirect, useLoaderData, useRouteError, useSearchParams,
+  type LoaderFunctionArgs, type MetaFunction,
+} from 'react-router';
 import {Artwork} from '~/components/Artwork';
-export function meta() {return [{title: 'An object — desert FORMAL'}];}
-export default function Product() {
-  const {slug} = useParams();
-  const product = products.find((item) => item.slug === slug);
-  if (!product) return <div className="about-page"><h1>Object not found.</h1><Link to="/gallery">Return to gallery ↗</Link></div>;
-  return <article className="product-page"><div className={`product-study color-${product.color}`}><Artwork kind={product.art}/><span>Object study / sample illustration</span></div><div className="product-info"><Link to="/gallery" className="text-button">← Back to gallery</Link><p className="eyebrow">{product.category}</p><h1>{product.name}</h1><p>A placeholder object for exploring the gallery. Your product photography, description, price, and available options will take its place.</p><div className="product-status">Sample product — not available to purchase</div><details><summary>Details & materials +</summary><p>Product details will come from Shopify, separately from the page design.</p></details></div></article>;
+import {products} from '~/content/products';
+
+const retiredStudies = new Set([
+  'study-shirt', 'everyday-cap', 'field-tote', 'studio-shirt', 'collected-pages',
+  'small-vessel', 'day-shirt', 'canvas-cap', 'market-tote', 'studio-notebook',
+  'table-vessel', 'night-shirt', 'field-cap', 'weekend-tote', 'field-notes',
+  'tall-vessel', 'travel-shirt', 'sun-cap', 'archive-tote', 'collected-studies',
+]);
+
+export function loader({params}: LoaderFunctionArgs) {
+  const slug = params.slug ?? '';
+  const product = products.find(item => item.slug === slug);
+  if (product) return {product};
+  if (retiredStudies.has(slug)) throw redirect('/gallery', 301);
+  throw new Response('Piece not found', {status: 404});
+}
+
+export const meta: MetaFunction<typeof loader> = ({data}) => [
+  {title: data ? `${data.product.name} — FORMAL` : 'Gallery — FORMAL'},
+];
+
+export default function ProductPage() {
+  const {product} = useLoaderData<typeof loader>();
+  const [params] = useSearchParams();
+  const gallery = params.get('view') === 'all' ? '/gallery?view=all' : `/gallery?item=${product.slug}`;
+
+  return <article className="product-page" aria-labelledby="product-name">
+    <figure className="product-study">
+      <Artwork kind={product.art}/>
+      <figcaption><h1 id="product-name">{product.name}</h1></figcaption>
+    </figure>
+    <div className="product-options">
+      <Link className="product-option" to={gallery}>back to gallery</Link>
+      <details className="product-release" onKeyDown={event => {
+        if (event.key === 'Escape') event.currentTarget.open = false;
+      }}>
+        <summary className="product-option">coming soon</summary>
+        <p className="product-release-note">Release date to be announced.</p>
+      </details>
+    </div>
+  </article>;
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  return <article className="product-missing">
+    <h1>{isRouteErrorResponse(error) && error.status === 404 ? 'Piece not found.' : 'This piece is temporarily unavailable.'}</h1>
+    <Link className="product-option" to="/gallery">back to gallery</Link>
+  </article>;
 }
