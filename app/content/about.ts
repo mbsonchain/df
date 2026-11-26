@@ -13,7 +13,7 @@ export const aboutSections = [
   {
     "id": "purchasing",
     "title": "PURCHASING",
-    "body": "all FORMAL products are made to order in limited batches to limit waste, and are therefore available for purchase via request only. you must be a member of the FORMAL collective to request a FORMAL product. if your request is granted, your order will be produced within the next development cycle. as a token of appreciation to the collective for supporting our mission, orders are discounted to the cost of production and generate no profit for the label. certain products may become available to the general public at a higher retail price and later date, subject to availability. members of the general public may request to join the FORMAL collective via the desert FORMAL network at anytime, subject to availability."
+    "body": "all FORMAL products are made to order in limited batches to limit waste, and are therefore available for purchase via request only. you must be a member of the FORMAL collective to request a FORMAL product. if your request is granted, your order will be produced within the following development cycle. as a token of appreciation to the collective for supporting our mission, orders are discounted to the cost of production and generate no profit for the label. certain products may become available to the general public at a higher retail price and later date, subject to availability. members of the general public may request to join the FORMAL collective via the desert FORMAL network at anytime, subject to availability."
   }
 ] as const;
 
