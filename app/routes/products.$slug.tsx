@@ -32,15 +32,17 @@ export default function ProductPage() {
   return <article className="product-page" aria-labelledby="product-name">
     <figure className="product-study">
       <Artwork kind={product.art}/>
-      <figcaption><h1 id="product-name">{product.name}</h1></figcaption>
+      <figcaption>
+        <h1 id="product-name">{product.name}</h1>
+        <p id="product-release-note" className="product-release-note">Release date to be announced.</p>
+      </figcaption>
     </figure>
     <div className="product-options">
       <Link className="product-option" to={gallery}>back to gallery</Link>
-      <details className="product-release" onKeyDown={event => {
+      <details className="product-release" aria-owns="product-release-note" onKeyDown={event => {
         if (event.key === 'Escape') event.currentTarget.open = false;
       }}>
-        <summary className="product-option">coming soon</summary>
-        <p className="product-release-note">Release date to be announced.</p>
+        <summary className="product-option" aria-controls="product-release-note">coming soon</summary>
       </details>
     </div>
   </article>;
