@@ -103,7 +103,7 @@ export function Shell({children, accessSiteId}: {children: React.ReactNode; acce
           <span aria-hidden="true">←</span>
         </Link>
       )}
-      {pathname === '/about' && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}
+      {(pathname === '/about' || /^\/cart\/?$/.test(pathname)) && <p className="about-footer-copyright">© {new Date().getUTCFullYear()} <FormalText>FORMAL</FormalText></p>}
       {section && <ViewToggle section={section} labels={labels} links={viewLinks} active={activeView}/>}
     </footer>
   </div>;
