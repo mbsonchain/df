@@ -10,8 +10,8 @@ export const products = [
   {slug: 'sfiga-tee', name: 'SFIGA TEE', art: 'tee'},
   {slug: 'flower-tee', name: 'FLOWER TEE', art: 'tee'},
   {slug: 'selvedge-denim', name: 'SELVEDGE DENIM', art: 'pants'},
-  {slug: 'capri-pants', name: 'CAPRI PANTS', art: 'pants'},
-  {slug: 'flower-sweats', name: 'FLOWER SWEATS', art: 'pants'},
+  {slug: 'capri-sweats', name: 'CAPRI SWEATS', art: 'pants'},
+  {slug: 'flower-pants', name: 'FLOWER PANTS', art: 'pants'},
   {slug: 'formalbag', name: 'FORMALBAG', art: 'duffel'},
   {slug: 'flowerbag', name: 'FLOWERBAG', art: 'shoulder-bag'},
   {slug: 'passport-wallet', name: 'PASSPORT WALLET', art: 'passport-wallet'},
@@ -22,3 +22,12 @@ export const products = [
 ] as const;
 
 export type Product = (typeof products)[number];
+
+const previousSlugs = new Map<string, Product['slug']>([
+  ['capri-pants', 'capri-sweats'],
+  ['flower-sweats', 'flower-pants'],
+]);
+
+export function currentProductSlug(slug: string) {
+  return previousSlugs.get(slug) ?? slug;
+}

@@ -3,7 +3,7 @@ import {
   type LoaderFunctionArgs, type MetaFunction,
 } from 'react-router';
 import {Artwork} from '~/components/Artwork';
-import {products} from '~/content/products';
+import {currentProductSlug, products} from '~/content/products';
 import {galleryViewLinks} from '~/content/views';
 
 const retiredStudies = new Set([
@@ -15,6 +15,8 @@ const retiredStudies = new Set([
 
 export function loader({params, request}: LoaderFunctionArgs) {
   const slug = params.slug ?? '';
+  const currentSlug = currentProductSlug(slug);
+  if (slug !== currentSlug) throw redirect(`/products/${currentSlug}${new URL(request.url).search}`, 301);
   const product = products.find(item => item.slug === slug);
   if (product) {
     const fromGrid = new URL(request.url).searchParams.get('view') === 'all';
@@ -36,7 +38,7 @@ export default function ProductPage() {
       <Artwork kind={product.art}/>
       <figcaption>
         <h1 id="product-name">{product.name}</h1>
-        <p id="product-release-note" className="product-release-note">Release date to be announced.</p>
+        <p id="product-release-note" className="product-release-note">release date to be announced</p>
       </figcaption>
     </figure>
     <details className="product-release" aria-owns="product-release-note" onKeyDown={event => {

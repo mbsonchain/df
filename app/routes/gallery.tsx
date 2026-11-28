@@ -1,13 +1,16 @@
 import {useEffect, useRef, useState} from 'react';
 import {Link, useSearchParams} from 'react-router';
-import {products} from '~/content/products';
+import {currentProductSlug, products} from '~/content/products';
 import {Artwork} from '~/components/Artwork';
 import {viewIndex} from '~/content/views';
 export function meta() {return [{title:'Gallery — FORMAL'}];}
 export default function Gallery() {
   const [params] = useSearchParams();
   const view = viewIndex('gallery', params.get('view'));
-  const [center,setCenter] = useState(() => Math.max(0, products.findIndex(product => product.slug === params.get('item'))));
+  const [center,setCenter] = useState(() => {
+    const slug = currentProductSlug(params.get('item') ?? '');
+    return Math.max(0, products.findIndex(product => product.slug === slug));
+  });
   const belt = useRef<HTMLDivElement>(null);
   const wheelAt = useRef(0);
   const pointer = useRef<{x:number;y:number} | null>(null);
